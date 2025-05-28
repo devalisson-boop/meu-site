@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PlayGamer Store</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="main-carrinho.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
+  <script src="login-check.js"></script>
+
+</head>
+<body>
+  body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🎮 GamerZone</div>
+      <ul class="nav-links">
+        <li><a href="#">Início</a></li>
+        <li class="dropdown">
+          <a href="#">Produtos</a>
+          <ul class="dropdown-menu">
+            <li><a href="montagen.html">Montagem de PC</a></li>
+            <li><a href="jogos.html">Jogos</a></li>
+            <li><a href="perifericos.html">Periféricos</a></li>
+          </ul>
+        </li>
+        <li><a href="promoçoes.html">Ofertas</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        <li id="login-link"><a href="login.html">Login</a></li>
+        <li><a href="#" onclick="abrirCarrinho()">🛒 Carrinho</a></li>
+        <li>
+          <!-- Formulário de pesquisa na navbar -->
+          <form id="form-pesquisa" class="form-pesquisa" onsubmit="return false;">
+            <input type="text" id="input-pesquisa" placeholder="Pesquisar produtos..." aria-label="Pesquisar produtos" autocomplete="off">
+            <button type="submit">🔍</button>
+          </form>
+        </li>
+        <li>
+          <button id="profile-btn" title="Minha Conta" class="profile-btn">
+            <svg id="profile-icon" width="32" height="32" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22" stroke="#ff5050" stroke-width="4" fill="#e5e5e5"/>
+              <ellipse cx="24" cy="21" rx="8" ry="8" fill="#bbb"/>
+              <ellipse cx="24" cy="35" rx="13" ry="7" fill="#bbb"/>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- HERO / DESTAQUE -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Experimente o Poder do Mundo Gamer</h1>
+      <p>Os melhores periféricos e acessórios para sua jogatina no nível máximo.</p>
+      <a href="#produtos" class="btn-hero">Ver Produtos</a>
+    </div>
+  </section>
+
+<div id="resultados-pesquisa" class="resultados-pesquisa"></div>
+
+  <main id="produtos">
+    <h2 class="section-title">🔥 Produtos em Destaque</h2>
+    <section class="product-grid">
+
+      <div class="product-card">
+        <img src="img.png/ChatGPT Image 23 de mai. de 2025, 20_48_52.png" alt="Headset Gamer">
+        <h3>Headset Gamer PS5</h3>
+        <p class="price">R$ 349,90</p>
+        <p class="desc">Som surround imersivo e microfone com cancelamento de ruído.</p>
+        <button class="add-to-cart">Adicionar ao carrinho</button>
+      </div>
+
+      <div class="product-card">
+        <img src="img.png/5102Pp-TfHL.jpg" alt="Controle DualSense">
+        <h3>Controle DualSense</h3>
+        <p class="price">R$ 449,00</p>
+        <p class="desc">Feedback tátil, gatilhos adaptáveis e design inovador.</p>
+        <button class="add-to-cart">Adicionar ao carrinho</button>
+      </div>
+
+      <div class="product-card">
+        <img src="img.png/71Ur6Xn4PyL.jpg" alt="Teclado RGB Gamer">
+        <h3>Teclado RGB Gamer</h3>
+        <p class="price">R$ 299,00</p>
+        <p class="desc">Switches mecânicos, iluminação RGB e alta durabilidade.</p>
+        <button class="add-to-cart">Adicionar ao carrinho</button>
+      </div>
+    </section>
+  </main>
+
+   
+
+
+    <h2 class="section-title">✨ Produtos com Especificações</h2>
+    <section class="immersive-products">
+      <div class="immersive-card">
+        <div class="immersive-image headset"></div>
+        <div class="immersive-info">
+          <h3>Headset RGB 7.1 Surround</h3>
+          <p>
+            - Som 7.1 Real<br>
+            - Microfone com Cancelamento<br>
+            - Conforto prolongado<br>
+            - RGB programável
+          </p>
+        </div>
+      </div>
+    
+      <div class="immersive-card">
+        <div class="immersive-image controle"></div>
+        <div class="immersive-info">
+          <h3>Controle DualSense PS5</h3>
+          <p>
+            - Gatilhos Adaptáveis<br>
+            - Feedback Tátil<br>
+            - Bateria Longa Duração<br>
+            - Cabo USB-C incluso
+          </p>
+        </div>
+      </div>
+    
+      <div class="immersive-card">
+        <div class="immersive-image teclado"></div>
+        <div class="immersive-info">
+          <h3>Teclado Mecânico RGB</h3>
+          <p>
+            - Switches Azul ou Red<br>
+            - RGB com 16 modos<br>
+            - Anti-Ghosting<br>
+            - Estrutura em Alumínio
+          </p>
+        </div>
+      </div>
+    </section>
+    
+
+  </main>
+
+
+
+
+
+
+  <!-- VENDA DE JOGOS -->
+<section id="venda-de-jogos" class="venda-de-jogos">
+   <div id="resultados-pesquisa" class="resultados-pesquisa"></div>
+
+    <h2 class="section-title">🎮 Jogos em Promoção</h2>
+    <div class="games-grid">
+      <!-- Jogo 1 -->
+     <div class="game-card product-card">
+  <div class="game-cover" style="background-image: url('img.png/ChatGPT Image 23 de mai. de 2025, 21_38_04.png');">
+    <!-- Adicione esta IMG oculta para o JS funcionar -->
+    <img src="img.png/ChatGPT Image 23 de mai. de 2025, 21_38_04.png" alt="Jogo Incrível" style="display:none;">
+    <div class="game-info">
+      <h3>Jogo GUN FIRE</h3>
+      <p class="game-desc">Um jogo de aventura épico, com gráficos incríveis e jogabilidade viciante!</p>
+      <p class="game-price price">R$ 159,90</p>
+      <button class="add-to-cart">Adicionar ao Carrinho</button>
+    </div>
+  </div>
+</div>
+      
+      <!-- Jogo 2 -->
+     <div class="game-card product-card">
+  <div class="game-cover" style="background-image: url('img.png/ChatGPT Image 23 de mai. de 2025, 21_45_58.png');">
+    <!-- Adicione esta IMG oculta para o JS funcionar -->
+    <img src="img.png/ChatGPT Image 23 de mai. de 2025, 21_45_58.png" alt="Jogo Incrível" style="display:none;">
+    <div class="game-info">
+      <h3>MINECRAFT</h3>
+      <p class="game-desc">Um jogo de aventura épico, com gráficos incríveis e jogabilidade viciante!</p>
+      <p class="game-price price">R$ 159,90</p>
+      <button class="add-to-cart">Adicionar ao Carrinho</button>
+    </div>
+  </div>
+</div>
+      <!-- Jogo 3 -->
+    <div class="game-card product-card">
+  <div class="game-cover" style="background-image: url('img.png/ChatGPT Image 23 de mai. de 2025, 21_54_57.png');">
+    <!-- Adicione esta IMG oculta para o JS funcionar -->
+    <img src="img.png/ChatGPT Image 23 de mai. de 2025, 21_54_57.png" alt="Jogo Incrível" style="display:none;">
+    <div class="game-info">
+      <h3>Brawl Stars</h3>
+      <p class="game-desc">Um jogo de aventura épico, com gráficos incríveis e jogabilidade viciante!</p>
+      <p class="game-price price">R$ 159,90</p>
+      <button class="add-to-cart">Adicionar ao Carrinho</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+  
+    <!-- Navegação com ícones interativos -->
+    <section class="dispositivos">
+      <h2>Explore os Dispositivos</h2>
+      <div class="icones">
+        <!-- Ícone de PC -->
+        <div class="icone" id="pc">
+          <img src="img.png/pngtree-color-glare-computer-free-map-image_1276302-removebg-preview.png" alt="PC" />
+          <div class="descricao" id="descricao-pc">
+            <h3>PC Gamer</h3>
+            <p>Escolha os melhores componentes para o seu PC, como processador, placa de vídeo, e muito mais.</p>
+          </div>
+        </div>
+        
+        <!-- Ícone de Mobile -->
+        <div class="icone" id="mobile">
+          <img src="img.png/10423126-removebg-preview.png" alt="Mobile" />
+          <div class="descricao" id="descricao-mobile">
+            <h3>Mobile</h3>
+            <p>Os melhores acessórios para melhorar sua experiência no mobile, como capinhas, fones de ouvido e mais.</p>
+          </div>
+        </div>
+        
+        <!-- Ícone de Console -->
+        <div class="icone" id="console">
+          <img src="img.png/pngtree-top-quality-play-station-console-isolated-on-transparent-background-png-image_13320220-removebg-preview.png" alt="Console" />
+          <div class="descricao" id="descricao-console">
+            <h3>Console</h3>
+            <p>Explore acessórios como joysticks, controles, e outros itens essenciais para o seu console.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+   
+  
+
+
+    
+  <!-- DIFERENCIAIS -->
+  <section class="benefits">
+    <h2>💡 Por que comprar na PlayGamer?</h2>
+    <div class="benefit-cards">
+      <div class="benefit-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3500/3500833.png" alt="Frete Grátis" />
+        <h4>Frete Grátis</h4>
+        <p>Entrega gratuita em todo o Brasil para pedidos acima de R$ 250.</p>
+      </div>
+      <div class="benefit-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/753/753345.png" alt="Garantia" />
+        <h4>Garantia Total</h4>
+        <p>Todos os produtos com garantia de até 12 meses.</p>
+      </div>
+      <div class="benefit-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" alt="Suporte" />
+        <h4>Suporte Rápido</h4>
+        <p>Atendimento especializado via chat, e-mail e WhatsApp.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrinho lateral -->
+<div id="carrinho-lateral" class="carrinho">
+  <h2>🛒 Carrinho</h2>
+  <div id="itens-carrinho" style="max-height: 53vh; overflow-y: auto; margin-bottom:1rem;"></div>
+  <p>Total: <span id="total">R$ 0,00</span></p>
+  <button onclick="fecharCarrinho()">Fechar</button>
+  <button id="btn-pagamento" class="btn-pagamento" onclick="irAoPagamento()">Ir ao Pagamento <i class="fas fa-arrow-right"></i></button>
+</div>
+
+  <footer class="final-section">
+    <h2>🛒 A Loja Gamer Que Você Merece</h2>
+    <p>
+      Na PlayGamer, você encontra os melhores periféricos com preços justos, atendimento de primeira e qualidade garantida. Somos apaixonados pelo universo dos games e queremos transformar sua experiência. Compre com segurança, receba rápido e eleve sua gameplay ao próximo nível.
+    </p>
+  </footer>
+
+
+
+
+<script>
+async function coletarProdutosPaginaExpandido() {
+  let produtos = [];
+  // Produtos da página atual
+  document.querySelectorAll('.product-card, .game-card, .immersive-card').forEach(card => {
+    const nome = card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : '';
+    const precoElem = card.querySelector('.price') || card.querySelector('.game-price');
+    const preco = precoElem ? precoElem.textContent.replace('R$', '').replace(',', '.').trim() : '';
+    const precoNum = Number(preco);
+    const imgElem = card.querySelector('img');
+    const imagem_url = imgElem ? imgElem.src : '';
+    produtos.push({ nome, preco: precoNum, imagem_url, pagina: window.location.pathname.replace(/^\//,'') || "index.html" });
+  });
+
+  // Busca produtos de outras páginas
+  const paginasExtras = [
+    { url: 'montagen.html', seletor: '.product-card, .game-card, .immersive-card' },
+    { url: 'jogos.html', seletor: '.product-card, .game-card, .immersive-card' },
+    { url: 'perifericos.html', seletor: '.product-card, .game-card, .immersive-card' }
+  ];
+
+  for (const pagina of paginasExtras) {
+    try {
+      if((window.location.pathname.indexOf(pagina.url)!==-1)) continue;
+      const resp = await fetch(pagina.url);
+      if (!resp.ok) continue;
+      const html = await resp.text();
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      temp.querySelectorAll(pagina.seletor).forEach(card => {
+        const nome = card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : '';
+        const precoElem = card.querySelector('.price') || card.querySelector('.game-price');
+        const preco = precoElem ? precoElem.textContent.replace('R$', '').replace(',', '.').trim() : '';
+        const precoNum = Number(preco);
+        const imgElem = card.querySelector('img');
+        const imagem_url = imgElem ? imgElem.src : '';
+        produtos.push({ nome, preco: precoNum, imagem_url, pagina: pagina.url });
+      });
+    } catch(e) {}
+  }
+
+  return produtos;
+}
+
+// Destacar produto ao carregar se ?produto= estiver na URL
+function destacarProdutoAoCarregar() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const produtoNome = urlParams.get('produto');
+  if(produtoNome) {
+    const cards = document.querySelectorAll('.product-card, .game-card, .immersive-card');
+    cards.forEach(card => {
+      const h3 = card.querySelector('h3');
+      if(h3 && h3.textContent.trim().toLowerCase() === decodeURIComponent(produtoNome).toLowerCase()) {
+        card.scrollIntoView({behavior: "smooth", block: "center"});
+        card.style.boxShadow = "0 0 0 5px #38b6ff";
+        setTimeout(()=>{card.style.boxShadow='';}, 3000);
+      }
+    });
+  }
+}
+document.addEventListener("DOMContentLoaded", destacarProdutoAoCarregar);
+
+// Lida com o formulário de pesquisa expandida
+document.getElementById('form-pesquisa').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const termo = document.getElementById('input-pesquisa').value;
+  const divResultados = document.getElementById('resultados-pesquisa');
+
+  if (termo.length < 2) {
+    divResultados.style.display = "none";
+    return;
+  }
+
+  divResultados.innerHTML = "Buscando...";
+  divResultados.style.display = "block";
+
+  const resultados = await coletarProdutosPaginaExpandido();
+  const encontrados = resultados.filter(prod => prod.nome && prod.nome.toLowerCase().includes(termo.toLowerCase()));
+
+  if(encontrados.length === 0){
+    divResultados.innerHTML = `<b>Produto não encontrado.</b>`;
+    return;
+  }
+  let html = `<b>Resultados encontrados:</b><br><br>`;
+  encontrados.forEach(prod => {
+    if((prod.pagina === window.location.pathname.replace(/^\//,'') || (prod.pagina==="index.html" && window.location.pathname==="/"))) {
+      html += `<div class="resultado-produto" style="cursor:pointer" onclick="rolarAteProduto('${encodeURIComponent(prod.nome)}')">
+        ${prod.imagem_url ? `<img src="${prod.imagem_url}" alt="${prod.nome}">` : ''}
+        <div>
+          <div style="font-weight:600;font-size:1.07em;">${prod.nome}</div>
+          ${prod.preco ? `<div style="color:#2ecc40;">R$ ${prod.preco.toFixed(2).replace('.', ',')}</div>` : ''}
+          <div style="font-size:0.92em;color:#aaa;">Página atual</div>
+        </div>
+      </div>`;
+    } else {
+      html += `<a href="${prod.pagina}?produto=${encodeURIComponent(prod.nome)}" style="text-decoration:none;color:unset;">
+        <div class="resultado-produto" style="cursor:pointer">
+          ${prod.imagem_url ? `<img src="${prod.imagem_url}" alt="${prod.nome}">` : ''}
+          <div>
+            <div style="font-weight:600;font-size:1.07em;">${prod.nome}</div>
+            ${prod.preco ? `<div style="color:#2ecc40;">R$ ${prod.preco.toFixed(2).replace('.', ',')}</div>` : ''}
+            <div style="font-size:0.92em;color:#aaa;">${prod.pagina.replace('.html','').replace('index','Início').replace('montagen','Montagem').replace('jogos','Jogos').replace('perifericos','Periféricos')}</div>
+          </div>
+        </div>
+      </a>`;
+    }
+  });
+  divResultados.innerHTML = html;
+});
+
+function rolarAteProduto(nome) {
+  const cards = document.querySelectorAll('.product-card, .game-card, .immersive-card');
+  cards.forEach(card => {
+    const h3 = card.querySelector('h3');
+    if(h3 && h3.textContent.trim().toLowerCase() === decodeURIComponent(nome).toLowerCase()) {
+      card.scrollIntoView({behavior: "smooth", block: "center"});
+      card.style.boxShadow = "0 0 0 5px #38b6ff";
+      setTimeout(()=>{card.style.boxShadow='';}, 3000);
+    }
+  });
+}
+
+// Fecha resultados ao clicar fora
+document.addEventListener('click', function(e){
+  const resultados = document.getElementById('resultados-pesquisa');
+  const form = document.getElementById('form-pesquisa');
+  if(resultados && !form.contains(e.target) && !resultados.contains(e.target)){
+    resultados.style.display = "none";
+  }
+});
+</script>
+
+
+
+
+</body>
+</html>

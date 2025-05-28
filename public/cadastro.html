@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro Gamer</title>
+  
+  <link rel="stylesheet" href="login.css">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+ <div class="login-container">
+    <h2>Cadastro</h2>
+    <form id="cadastroForm">
+      <div class="form-group">
+        <label for="nome">Nome do usuário</label>
+        <input type="text" id="nome" name="nome" required />
+
+      </div>
+
+      <div class="form-group">
+        <label for="dataNascimento">Data de Nascimento</label>
+        <input type="date" id="dataNascimento" name="nome"  required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="nome" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="nome" required />
+      </div>
+
+      <button type="submit" class="login-btn">Cadastrar</button>
+
+      <div class="signup-link">
+        Já tem uma conta? <a href="login.html">Faça login</a>
+      </div>
+    </form>
+  </div>
+
+<script>
+
+document.getElementById('cadastroForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const nome = document.getElementById('nome').value.trim();
+  const dataNascimento = document.getElementById('dataNascimento').value;
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  if (!nome || !dataNascimento || !email || !password) {
+    alert("Preencha todos os campos.");
+    return;
+  }
+
+  if (password.length < 8) {
+    alert("A senha deve ter pelo menos 8 caracteres.");
+    return;
+  }
+
+  // Verifica idade mínima de 18 anos
+  const nascimento = new Date(dataNascimento);
+  const hoje = new Date();
+  let idade = hoje.getFullYear() - nascimento.getFullYear(); // trocado para let
+  const mes = hoje.getMonth() - nascimento.getMonth();
+  if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+    idade--;
+  }
+
+  if (idade < 18) {
+    alert("Você precisa ter pelo menos 18 anos.");
+    return;
+  }
+
+  try {
+    const response = await fetch('/cadastro', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, dataNascimento, email, password })
+    });
+
+    const result = await response.text();
+    alert(result);
+
+    if (response.ok) {
+      window.location.href = "/login.html";
+    }
+  } catch (error) {
+    alert("Erro na requisição: " + error.message);
+  }
+});
+
+
+</script>
+
+</body>
+</html>

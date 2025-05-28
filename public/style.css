@@ -1,0 +1,909 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0b0f1a;
+    color: white;
+  }
+  
+  /* NAVBAR */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+  }
+
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00aaff;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .nav-links a:hover {
+    color: #00aaff;
+  }
+  
+  /* MAIN */
+  main {
+    padding-top: 90px; /* espaço para navbar fixa */
+    padding: 20px;
+  }
+  
+  /* GRID DE PRODUTOS */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+  }
+  
+  /* CARD DE PRODUTO */
+  .product-card {
+    background-color: #1b1f2f;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s;
+    box-shadow: 0 0 15px rgba(0,170,255, 0.1);
+  }
+  
+  .product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(0,170,255, 0.3);
+  }
+  
+  .product-card img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+  
+  .product-card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #00aaff;
+  }
+  
+  .product-card .price {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .product-card button {
+    background-color: #00aaff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .product-card button:hover {
+    background-color: #0077cc;
+  }
+  
+  /* RESPONSIVIDADE */
+  @media (max-width: 600px) {
+    .nav-links {
+      display: none;
+    }
+  }
+  
+
+
+  /* HERO */
+.hero {
+  background: linear-gradient(to right, #0d1a2d, #1a3d73);
+  color: white;
+  padding: 100px 20px 80px;
+  text-align: center;
+  background-image: url('https://images.unsplash.com/photo-1612197527276-2f5cb54a6ab3');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+.hero p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.btn-hero {
+  background-color: #00aaff;
+  padding: 12px 25px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.btn-hero:hover {
+  background-color: #007acc;
+}
+
+/* SEÇÃO BENEFÍCIOS */
+.benefits {
+  background-color: #111827;
+  padding: 40px 20px;
+  text-align: center;
+}
+.benefit-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+.benefit-card {
+  background: #1f2937;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 250px;
+  color: white;
+  transition: transform 0.3s;
+}
+.benefit-card:hover {
+  transform: translateY(-5px);
+}
+.benefit-card img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+
+/* Imersão com Especificações */
+.immersive-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 40px;
+  justify-content: center;
+}
+
+.immersive-card {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background-color: #111927;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(0,170,255,0.1);
+  transition: transform 0.4s;
+}
+
+.immersive-card:hover {
+  transform: scale(1.03);
+}
+
+.immersive-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.7);
+  transition: filter 0.3s ease;
+}
+
+.immersive-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(5, 13, 22, 0.92);
+  color: #00aaff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  text-align: center;
+}
+
+.immersive-card:hover .immersive-info {
+  opacity: 1;
+}
+
+.immersive-info h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.immersive-info p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Imagens autorais por código */
+.immersive-image.headset {
+  background-image: radial-gradient(circle at 20% 20%, #00aaff, #000), url('https://cdn.pixabay.com/photo/2020/10/12/10/28/gaming-5647000_1280.jpg');
+}
+
+.immersive-image.controle {
+  background-image: radial-gradient(circle at 80% 20%, #ff0055, #000), url('https://cdn.pixabay.com/photo/2020/06/30/17/15/controller-5354236_1280.jpg');
+}
+
+.immersive-image.teclado {
+  background-image: radial-gradient(circle at 50% 80%, #00ffcc, #000), url('https://cdn.pixabay.com/photo/2021/03/10/10/06/keyboard-6082594_1280.jpg');
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .immersive-products {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+/* Estilo para a Seção de Jogos */
+.venda-de-jogos {
+  background-color: #111927;
+  padding: 60px 20px 40px 20px; /* padding-bottom menor */
+  margin-bottom: 0;
+}
+
+
+.venda-de-jogos .section-title {
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.games-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.game-card {
+  position: relative;
+  width: 250px;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: transform 0.3s ease-in-out;
+  background-color: #222a3a;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-cover {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+}
+
+.game-card:hover .game-cover {
+  transform: translateX(-20%);
+}
+
+.game-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 15px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  text-align: center;
+}
+
+.game-card:hover .game-info {
+  opacity: 1;
+}
+
+.game-info h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.game-info p {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.game-info .game-price {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.add-to-cart {
+  background-color: #ff007f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background-color: #ff0055;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .games-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+
+/* Estilo do Menu Suspenso */
+.nav-links .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-links .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.nav-links .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #222a3a;
+  border-radius: 5px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  min-width: 160px;
+  z-index: 1;
+}
+
+.nav-links .dropdown-menu li {
+  padding: 10px;
+}
+
+.nav-links .dropdown-menu li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 8px 15px;
+}
+
+.nav-links .dropdown-menu li a:hover {
+  background-color: #ff007f;
+}
+
+/* Estilos para o link "Produtos" */
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+}
+
+/* Hover no link "Produtos" */
+.nav-links .dropdown a:hover {
+  background-color: #444;
+}
+
+
+
+
+
+/*parte interativa com icones*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0b0f1a; /* Fundo escuro */
+  color: white;
+}
+
+h2 {
+  text-align: center;
+  margin: 50px 0;
+  color: #00aaff; /* Vermelho Gamer */
+}
+
+.dispositivos {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.icones {
+  display: flex;
+  gap: 30px;
+}
+
+.icone {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.icone img {
+  width: 100px;
+  height: 100px;
+  transition: transform 0.3s ease;
+}
+
+/* Efeito de zoom quando o ícone é passado por cima */
+.icone:hover img {
+  transform: scale(1.2);
+}
+
+.descricao {
+  position: absolute;
+  bottom: -120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+  width: 180px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Exibir descrição quando passar o mouse sobre o ícone */
+.icone:hover .descricao {
+  opacity: 1;
+  visibility: visible;
+}
+
+h3 {
+  margin-bottom: 10px;
+  color: #00aaff; /* Cor do título */
+}
+
+p {
+  font-size: 14px;
+}
+
+/* GRID DE ICONE PARA PC, MOBILE E CONSOLE */
+.icone-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.icone-container .icone {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.icone-container .descricao {
+  position: absolute;
+  bottom: -120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.icone-container .icone:hover .descricao {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 600px) {
+  .icone-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+
+/* Carrinho lateral */
+
+ 
+    .add-to-cart {
+      background: red;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+   #carrinho-lateral {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  background: #222;
+  color: white;
+  padding: 20px;
+  transition: right 0.3s ease;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+#carrinho-lateral.ativo {
+  right: 0;
+}
+
+    .item-carrinho {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .item-carrinho img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+    }
+
+    .item-carrinho button.remover {
+  background: transparent;
+  border: none;
+  color: red;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+
+
+
+
+/* Nova seção: dispositivos */
+.dispositivos {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 40px auto;
+  flex-direction: column;
+  align-items: center;
+  background: #131b29;
+  border-radius: 18px;
+  box-shadow: 0 2px 15px rgba(0,170,255,0.06);
+  padding: 35px 10px 45px 10px;
+}
+
+.dispositivos h2 {
+  margin: 0 0 30px 0;
+  font-size: 28px;
+  color: #00aaff;
+  text-align: center;
+}
+
+.icones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  width: 100%;
+  min-height: 180px;
+}
+
+.icone {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.icone img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+  object-fit: contain;
+}
+
+.icone:hover img {
+  transform: scale(1.15);
+}
+
+.descricao {
+  position: absolute;
+  bottom: -145px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(16,22,34,0.93);
+  padding: 13px 10px;
+  border-radius: 10px;
+  width: 210px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 10;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.32);
+}
+
+.icone:hover .descricao,
+.icone:focus-within .descricao {
+  opacity: 1;
+  visibility: visible;
+}
+
+.descricao h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #00aaff;
+}
+
+.descricao p {
+  font-size: 13px;
+  color: #e4e4e4;
+  margin: 0;
+}
+
+/* Espaçamento entre dispositivos e próxima seção */
+.dispositivos {
+  margin-top: 0;
+  margin-bottom: 55px;
+}
+
+/* =========== RESPONSIVIDADE =========== */
+@media (max-width: 900px) {
+  .icones {
+    gap: 25px;
+  }
+  .dispositivos {
+    padding: 30px 4vw 35px 4vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .dispositivos {
+    padding: 20px 2vw 25px 2vw;
+  }
+  .icones {
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    min-height: 0;
+  }
+  .icone {
+    width: 110px;
+    height: 110px;
+    min-width: 110px;
+  }
+  .icone img {
+    width: 60px;
+    height: 60px;
+  }
+  .descricao {
+    width: 180px;
+    font-size: 12px;
+    bottom: -115px;
+    padding: 10px 7px;
+  }
+}
+
+@media (max-width: 400px) {
+  .dispositivos h2 {
+    font-size: 19px;
+  }
+  .icone {
+    width: 80px;
+    height: 80px;
+  }
+  .icone img {
+    width: 38px;
+    height: 38px;
+  }
+  .descricao {
+    width: 110px;
+    bottom: -80px;
+    font-size: 10px;
+    padding: 6px 2px;
+    border-radius: 7px;
+  }
+}
+
+/* ====== FIM DO BLOCO DISPOSITIVOS ====== */
+
+
+
+/* Final Section como rodapé fixo no final do conteúdo */
+.final-section {
+  background: #0f172a;
+  color: white;
+  padding: 50px 20px 30px 20px;
+  text-align: center;
+  width: 100%;
+  margin-top: 60px;
+  /* Remove qualquer max-width ou centralização para ser 100% */
+  box-sizing: border-box;
+}
+
+.final-section h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.final-section p {
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* Para garantir que fique bem em celulares */
+@media (max-width: 600px) {
+  .final-section {
+    padding: 32px 7vw 18px 7vw;
+  }
+  .final-section h2 {
+    font-size: 20px;
+  }
+  .final-section p {
+    font-size: 13px;
+  }
+}
+
+/* carrinho uma parte apraa o rolamento */
+#itens-carrinho {
+  max-height: 53vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding-right: 4px;
+}
+.btn-pagamento {
+  width: 100%;
+  background: linear-gradient(90deg, #38b6ff, #26d0ce);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  padding: .8rem 0;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  box-shadow: 0 2px 8px #38b6ff44;
+  cursor: pointer;
+  transition: background .2s, transform .1s;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+}
+.btn-pagamento:hover {
+  background: linear-gradient(90deg, #26d0ce, #38b6ff);
+  transform: scale(1.03);
+}
+
+/* icone do perfil*/
+
+.profile-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  cursor: pointer;
+}
+#profile-icon {
+  transition: stroke 0.2s;
+}
+#profile-icon.logado circle {
+  stroke: #2ecc40; /* Verde se logado */
+}
+#profile-icon.nao-logado circle {
+  stroke: #ff5050; /* Vermelho se não logado */
+}
+
+
+/*PESQUISAR*/
+.form-pesquisa {
+      display: flex; align-items: center; gap: 4px;
+      background: #23243a;
+      border-radius: 6px;
+      padding: 2px 8px;
+    }
+    .form-pesquisa input[type="text"] {
+      border: none;
+      background: transparent;
+      color: #fff;
+      padding: 5px;
+      outline: none;
+      width: 120px;
+    }
+    .form-pesquisa button {
+      background: none; border: none; color: #38b6ff; font-size: 1.2em; cursor:pointer;
+    }
+    .resultados-pesquisa {
+      background: #23243a;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px #38b6ff22;
+      color: #fff;
+      padding: 1.3em 1.4em;
+      min-height: 70px;
+      font-size: 1.08em;
+      margin:30px auto;
+      max-width:600px;
+      display:none;
+    }
+    .resultado-produto {
+      display: flex; align-items: center; gap: 17px;
+      margin-bottom: 13px;
+      border-bottom: 1px solid #454661;
+      padding-bottom: 9px;
+    }
+    .resultado-produto:last-child { border:0; margin-bottom:0;}
+    .resultado-produto img {
+      width: 70px; height: 70px; object-fit:cover; border-radius:8px; background:#111;
+    }

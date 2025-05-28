@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>GamerZone - Super Promoções Relâmpago</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts e Font Awesome -->
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:700|Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Animate.css para efeitos rápidos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- Swiper.js para carrossel -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #1d1931 70%, #ffb347 100%);
+      color: #fff;
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .navbar {
+      background: #21223b;
+      box-shadow: 0 2px 8px #0004;
+      padding: 1rem 0;
+    }
+    .navbar .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #ffae00;
+      font-weight: bold;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links li a:hover {
+      color: #ffae00;
+    }
+    .dropdown { position: relative; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 110%; left: 0;
+      background: #22244b;
+      box-shadow: 0 2px 8px #0008;
+      border-radius: 8px;
+      padding: .5rem 0;
+      min-width: 180px;
+      z-index: 99;
+    }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu li { padding: .5rem 1.2rem; }
+    .dropdown-menu li a {
+      color: #fff; display: block;
+    }
+    .dropdown-menu li a:hover {
+      color: #ffae00;
+      background: #292b4d;
+    }
+
+    .promo-hero {
+      background: linear-gradient(120deg, #ffae00 60%, #1d1931 100%);
+      padding: 2.5rem 0 1.5rem 0;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 2px 16px #0002;
+      position: relative;
+      overflow: hidden;
+    }
+    .promo-hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 2px;
+      margin-bottom: .3rem;
+      animation: flash 1.3s linear infinite alternate;
+    }
+    @keyframes flash {
+      0%, 100% { text-shadow: 0 0 12px #ffae00, 0 0 32px #ffae0044; }
+      50% { text-shadow: 0 0 24px #fff, 0 0 42px #ffae0099; }
+    }
+    .promo-hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.18rem;
+      color: #fff8d1;
+      animation: pulse 2.2s infinite alternate;
+    }
+    .promo-hero .relogio {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.1rem;
+      color: #fff;
+      background: #292b4d;
+      display: inline-block;
+      padding: .35em 1em;
+      border-radius: 10px;
+      margin-top: 1.1rem;
+      margin-bottom: .7rem;
+      box-shadow: 0 2px 18px #ffae0044;
+      letter-spacing: 2px;
+      animation: bounce 1s infinite alternate;
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0);}
+      100% { transform: translateY(-9px);}
+    }
+
+    .swiper {
+      width: 100%;
+      max-width: 1050px;
+      margin: 2rem auto 1.5rem auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 22px #ffae0033, 0 2px 12px #000a;
+      background: #23243a;
+      padding-bottom: 2rem;
+    }
+    .swiper-slide {
+      position: relative;
+      background: #181a2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.6rem 1.2rem 1.6rem;
+      min-height: 350px;
+      border-radius: 20px;
+      transition: box-shadow 0.2s;
+      box-shadow: 0 2px 15px #ffae0022;
+    }
+    .swiper-slide img {
+      max-width: 230px;
+      width: 83vw;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 1.1rem;
+      filter: drop-shadow(0 4px 16px #ffae0033);
+      background: #23243a;
+      border-radius: 12px;
+      padding: .6rem;
+      animation: pulse 2.7s infinite alternate;
+    }
+    .swiper-slide h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.18rem;
+      color: #ffae00;
+      margin-bottom: .18rem;
+      text-align: center;
+    }
+    .swiper-slide .preco-antigo {
+      color: #ff5d5d;
+      font-size: .98rem;
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+    .swiper-slide .preco-promo {
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      background: #ffae00;
+      border-radius: 5px;
+      padding: 0 .7em;
+      margin-left: .5em;
+      box-shadow: 0 2px 8px #ffae0044;
+    }
+    .swiper-slide .desc {
+      font-size: .97rem;
+      color: #fff8d1;
+      margin-bottom: .7rem;
+      margin-top: .2rem;
+      text-align: center;
+    }
+    .swiper-slide .add-to-cart {
+      background: linear-gradient(90deg, #ffae00, #ff5d5d);
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      padding: .55rem 1.1rem;
+      border-radius: 7px;
+      font-size: 1.04rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #ffae0044;
+      transition: background .22s, transform .1s;
+      letter-spacing: 1px;
+      margin-top: .6rem;
+      margin-bottom: .1rem;
+    }
+    .swiper-slide .add-to-cart:hover {
+      background: linear-gradient(90deg, #ff5d5d, #ffae00);
+      transform: scale(1.04);
+    }
+    .swiper-pagination-bullet-active {
+      background: #ffae00 !important;
+    }
+
+    /* Grade de produtos relâmpago */
+    .promo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+      padding: 2.5rem 4vw 1rem 4vw;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .promo-card {
+      background: linear-gradient(130deg, #23243a 70%, #ffae0030 100%);
+      border-radius: 16px;
+      box-shadow: 0 2px 20px #0007, 0 2px 8px #ffae0033;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .16s, box-shadow .22s;
+      cursor: pointer;
+      min-height: 320px;
+      position: relative;
+      border: 2px solid #ffae0040;
+      animation: fadeInUp 1.1s;
+    }
+    .promo-card:hover {
+      transform: scale(1.03) translateY(-4px);
+      box-shadow: 0 8px 32px #ffae0055, 0 2px 20px #0007;
+    }
+    .promo-img {
+      width: 100%;
+      height: 135px;
+      object-fit: contain;
+      background: #1a1d25;
+      border-radius: 16px 16px 0 0;
+      margin-bottom: .4rem;
+      margin-top: .1rem;
+      animation: pulse 2.7s infinite alternate;
+    }
+    .promo-info {
+      flex: 1;
+      padding: 1.2rem 1rem .7rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .2rem;
+      align-items: flex-start;
+    }
+    .promo-info h3 {
+      margin: 0;
+      font-size: 1.07rem;
+      font-family: 'Orbitron', sans-serif;
+      color: #ffae00;
+    }
+    .promo-info .preco-antigo {
+      font-size: .92rem;
+      text-decoration: line-through;
+      color: #ff5d5d;
+      font-weight: 500;
+    }
+    .promo-info .preco-promo {
+      font-size: 1.09rem;
+      font-weight: bold;
+      color: #fff;
+      background: #ffae00;
+      border-radius: 6px;
+      padding: 0 .6em;
+      margin-left: .5em;
+      box-shadow: 0 2px 8px #ffae0044;
+    }
+    .promo-info .desc {
+      font-size: .95rem;
+      color: #fff8d1;
+      margin: .13rem 0 .9rem 0;
+      flex: 1;
+    }
+    .promo-info .add-to-cart {
+      background: linear-gradient(90deg, #ffae00, #ff5d5d);
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      padding: .39rem 0;
+      border-radius: 6px;
+      font-size: .97rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #ffae0044;
+      transition: background .18s, transform .1s;
+      margin-top: .2rem;
+    }
+    .promo-info .add-to-cart:hover {
+      background: linear-gradient(90deg, #ff5d5d, #ffae00);
+      transform: scale(1.04);
+    }
+    .promo-badge {
+      position: absolute;
+      top: 0.7em; left: -1.2em;
+      background: linear-gradient(90deg, #ffae00, #ff5d5d);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: .92rem;
+      padding: .22em 1.3em;
+      transform: rotate(-20deg);
+      box-shadow: 0 2px 8px #ffae0044;
+      border-radius: 8px;
+      z-index: 3;
+      letter-spacing: 2px;
+      font-weight: 700;
+      animation: flash 1.3s linear infinite alternate;
+    }
+
+    /* Carrinho lateral fixo */
+    .carrinho {
+      position: fixed;
+      top: 0; right: -420px;
+      width: 380px;
+      height: 100vh;
+      background: #262a4a;
+      box-shadow: -8px 0 24px #ffae0033, 0 2px 8px #0005;
+      z-index: 2222;
+      padding: 2rem 1.6rem 1.4rem 1.6rem;
+      transition: right .32s cubic-bezier(.77,0,.18,1);
+      overflow-y: auto;
+    }
+    .carrinho.ativo { right: 0; }
+    .carrinho h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #ffae00;
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+    .item-carrinho {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: #23243a;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      padding: .7rem .6rem;
+      box-shadow: 0 2px 8px #0002;
+      position: relative;
+    }
+    .item-carrinho img {
+      width: 66px;
+      height: 66px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #16181e;
+    }
+    .item-carrinho strong { color: #ffae00; }
+    .item-carrinho .remover {
+      background: none;
+      border: none;
+      color: #ff5d5d;
+      font-size: 1.3rem;
+      cursor: pointer;
+      margin-left: 0.4rem;
+      transition: color 0.14s;
+    }
+    .item-carrinho .remover:hover {
+      color: #fff;
+      background: #ff5d5d;
+      border-radius: 3px;
+    }
+    #itens-carrinho {
+      max-height: 53vh;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      margin-bottom: 1rem;
+      padding-right: 4px;
+    }
+    .btn-pagamento {
+      width: 100%;
+      background: linear-gradient(90deg, #ffae00, #ff5d5d);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      padding: .8rem 0;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      box-shadow: 0 2px 8px #ffae0044;
+      cursor: pointer;
+      transition: background .2s, transform .1s;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7em;
+    }
+    .btn-pagamento:hover {
+      background: linear-gradient(90deg, #ff5d5d, #ffae00);
+      transform: scale(1.03);
+    }
+    @media (max-width: 900px) {
+      .promo-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem;}
+      .carrinho { width: 99vw; max-width: 410px; right: -110vw; }
+      .carrinho.ativo { right: 0; }
+      .swiper { max-width: 99vw;}
+    }
+    @media (max-width: 600px) {
+      .promo-hero h1 { font-size: 1.35rem;}
+      .promo-hero p { font-size: .97rem;}
+      .carrinho { padding: 1rem 3vw;}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🎮 GamerZone</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li class="dropdown">
+          <a href="#">Produtos</a>
+          <ul class="dropdown-menu">
+            <li><a href="montagen.html">Montagem de PC</a></li>
+            <li><a href="jogos.html">Jogos</a></li>
+            <li><a href="perifericos.html">Periféricos</a></li>
+          </ul>
+        </li>
+        <li><a href="promocoes.html">Ofertas</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        <li id="login-link"><a href="login.html">Login</a></li>
+        <li><a href="#" onclick="abrirCarrinho()">🛒 Carrinho</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="promo-hero">
+    <h1><i class="fa-solid fa-bolt"></i> Super Promoções Relâmpago!</h1>
+    <p>Aproveite descontos incríveis por tempo limitadíssimo! Clique e garanta seu produto antes que acabe.</p>
+    <div class="relogio" id="countdown"></div>
+  </section>
+
+  <!-- Carrossel de ofertas -->
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <!-- Slide 1 -->
+      <div class="swiper-slide">
+        <img src="imgpromoçao.png/Xbox_Series_S_with_controller-removebg-preview.png" alt="Xbox Series S">
+        <h3>Xbox Series S</h3>
+        <span class="preco-antigo">R$ 3.299,00</span>
+        <span class="preco-promo">R$ 2.199,00</span>
+        <div class="desc">Console Next-Gen, 512GB SSD, 120fps, silencioso e compacto. Estoque LIMITADO!</div>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Garantir agora</button>
+      </div>
+      <!-- Slide 2 -->
+      <div class="swiper-slide">
+        <img src="imgpromoçao.png/notebook-gamer-acer-aspire-nitro-5-amd-ryzen-7-4800h-gtx-1650-4gb-16gb-ddr4-ssd-256gb-hdd-1tb-endless-os-nhqabal008_150523-1-removebg-preview.png" alt="Notebook Gamer Acer Nitro 5">
+        <h3>Notebook Gamer Acer Nitro 5</h3>
+        <span class="preco-antigo">R$ 7.999,00</span>
+        <span class="preco-promo">R$ 5.399,00</span>
+        <div class="desc">i7 12ª Geração, RTX 3060, 16GB RAM, SSD 512GB. Potência e portabilidade para qualquer game!</div>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Garantir agora</button>
+      </div>
+      <!-- Slide 3 -->
+      <div class="swiper-slide">
+        <img src="imgpromoçao.png/dlcdnwebimgs.asus-removebg-preview.png" alt="RTX 4070 TI SUPER">
+        <h3>GeForce RTX 4070 TI SUPER</h3>
+        <span class="preco-antigo">R$ 7.499,00</span>
+        <span class="preco-promo">R$ 5.990,00</span>
+        <div class="desc">Desempenho absurdo em Ray Tracing, 16GB GDDR6X, ideal para 4K e streaming.</div>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Garantir agora</button>
+      </div>
+      <!-- Slide 4 -->
+      <div class="swiper-slide">
+        <img src="imgpromoçao.png/br-11134207-7r98o-lzsu731axxs1f4-removebg-preview.png" alt="Headset HyperX Cloud II">
+        <h3>Headset HyperX Cloud II</h3>
+        <span class="preco-antigo">R$ 899,00</span>
+        <span class="preco-promo">R$ 549,00</span>
+        <div class="desc">Áudio 7.1 Surround, microfone removível, conforto extremo para sessões longas.</div>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Garantir agora</button>
+      </div>
+      <!-- Slide 5 -->
+      <div class="swiper-slide">
+        <img src="imgpromoçao.png/mouse-gamer-logitech-g203-prodigy-11-8c2ac1bdfec8e61d5c16371708052488-1024-1024-removebg-preview.png" alt="Mouse Gamer Logitech G203">
+        <h3>Logitech G203 Lightsync</h3>
+        <span class="preco-antigo">R$ 239,00</span>
+        <span class="preco-promo">R$ 139,00</span>
+        <div class="desc">RGB personalizável, sensor de 8.000 DPI, clicks precisos e design compacto.</div>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Garantir agora</button>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+  <main>
+    <section class="promo-grid">
+      <!-- Produto relâmpago 1 -->
+      <div class="promo-card">
+        <span class="promo-badge">RELÂMPAGO</span>
+        <img class="promo-img" src="imgpromoçao.png/71NfMZKkpQL._AC_UF894,1000_QL80_.jpg" alt="SSD Kingston NV2 1TB">
+        <div class="promo-info">
+          <h3>SSD Kingston NV2 1TB NVMe</h3>
+          <span class="preco-antigo">R$ 699,00</span>
+          <span class="preco-promo">R$ 349,00</span>
+          <div class="desc">Velocidade de até 3.500MB/s. Ideal para upgrades de PC e notebook. Garantia 3 anos!</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Comprar</button>
+        </div>
+      </div>
+      <!-- Produto relâmpago 2 -->
+      <div class="promo-card">
+        <span class="promo-badge">RELÂMPAGO</span>
+        <img class="promo-img" src="imgpromoçao.png/cadeira-tgt-heron-tgt-hr-rgb01-removebg-preview.png" alt="Cadeira Gamer">
+        <div class="promo-info">
+          <h3>Cadeira Gamer MX7 RGB</h3>
+          <span class="preco-antigo">R$ 1.799,00</span>
+          <span class="preco-promo">R$ 1.099,00</span>
+          <div class="desc">Iluminação RGB, apoio lombar, reclinação 180°, design ergonômico e acabamento premium.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Comprar</button>
+        </div>
+      </div>
+      <!-- Produto relâmpago 3 -->
+      <div class="promo-card">
+        <span class="promo-badge">RELÂMPAGO</span>
+        <img class="promo-img" src="imgpromoçao.png/teclado-gamer-redragon-kumara-pro-k552w-rgb-02-removebg-preview.png" alt="Teclado Mecânico Redragon Kumara">
+        <div class="promo-info">
+          <h3>Redragon Kumara RGB</h3>
+          <span class="preco-antigo">R$ 289,00</span>
+          <span class="preco-promo">R$ 179,00</span>
+          <div class="desc">Switches Outemu Blue, RGB, compacto, estrutura reforçada. O favorito dos gamers BR!</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Comprar</button>
+        </div>
+      </div>
+      <!-- Produto relâmpago 4 -->
+      <div class="promo-card">
+        <span class="promo-badge">RELÂMPAGO</span>
+        <img class="promo-img" src="imgpromoçao.png/download-removebg-preview.png" alt="Elgato Stream Deck Mini">
+        <div class="promo-info">
+          <h3>Elgato Stream Deck Mini</h3>
+          <span class="preco-antigo">R$ 799,00</span>
+          <span class="preco-promo">R$ 559,00</span>
+          <div class="desc">6 teclas LCD customizáveis para comandos instantâneos em lives, vídeos e produtividade!</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Comprar</button>
+        </div>
+      </div>
+      <!-- Produto relâmpago 5 -->
+      <div class="promo-card">
+        <span class="promo-badge">RELÂMPAGO</span>
+        <img class="promo-img" src="imgpromoçao.png/81ZOKWmH2sL.jpg" alt="HUB USB RGB 7 Portas">
+        <div class="promo-info">
+          <h3>Hub USB 3.0 RGB 7 Portas</h3>
+          <span class="preco-antigo">R$ 259,00</span>
+          <span class="preco-promo">R$ 109,00</span>
+          <div class="desc">Expanda seu setup com estilo: 7 portas USB rápidas, RGB dinâmico, compatível com PC e notebook.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Comprar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Carrinho lateral -->
+  <div id="carrinho-lateral" class="carrinho">
+    <h2>🛒 Carrinho</h2>
+    <div id="itens-carrinho"></div>
+    <p>Total: <span id="total">R$ 0,00</span></p>
+    <button onclick="fecharCarrinho()">Fechar</button>
+    <button id="btn-pagamento" class="btn-pagamento" onclick="irAoPagamento()">Ir ao Pagamento <i class="fas fa-arrow-right"></i></button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Relógio de contagem regressiva (exemplo: 30 minutos)
+    function startCountdown(minutes) {
+      let end = new Date().getTime() + minutes*60*1000;
+      function update() {
+        let now = new Date().getTime();
+        let diff = Math.max(0, end-now);
+        let min = Math.floor(diff/60000).toString().padStart(2,'0');
+        let s = Math.floor((diff%60000)/1000).toString().padStart(2,'0');
+        document.getElementById('countdown').textContent = `${min}:${s}`;
+        if(diff>0) setTimeout(update, 1000);
+        else document.getElementById('countdown').textContent = "00:00";
+      }
+      update();
+    }
+    startCountdown(30);
+  </script>
+  <script>
+    // Carrossel Swiper
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      grabCursor: true,
+      slidesPerView: 1,
+      spaceBetween: 4,
+      effect: "coverflow",
+      coverflowEffect: { rotate: 10, stretch: 0, depth: 120, modifier: 1, slideShadows: false },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      pagination: { el: ".swiper-pagination", clickable: true },
+      breakpoints: {
+        700: { slidesPerView: 2, spaceBetween: 18 },
+        1000: { slidesPerView: 3, spaceBetween: 22 }
+      }
+    });
+  </script>
+  <script>
+    // Carrinho usando localStorage (compartilhado)
+    let totalCarrinho = 0;
+    const carrinhoItens = document.getElementById('itens-carrinho');
+    function abrirCarrinho() {
+      document.getElementById('carrinho-lateral').classList.add('ativo');
+      carregarCarrinhoDoLocalStorage();
+    }
+    function fecharCarrinho() {
+      document.getElementById('carrinho-lateral').classList.remove('ativo');
+    }
+    function atualizarTotal() {
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      let novoTotal = 0;
+      carrinho.forEach(item => {
+        novoTotal += item.preco * item.quantidade;
+      });
+      totalCarrinho = novoTotal;
+      document.getElementById('total').textContent = 'R$ ' + totalCarrinho.toFixed(2).replace('.', ',');
+    }
+    function carregarCarrinhoDoLocalStorage() {
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      carrinhoItens.innerHTML = '';
+      carrinho.forEach(item => {
+        const itemHTML = document.createElement('div');
+        itemHTML.classList.add('item-carrinho');
+        itemHTML.dataset.preco = item.preco;
+        itemHTML.dataset.nome = item.nome;
+        itemHTML.innerHTML = `
+          <img src="${item.imagem_url}" alt="${item.nome}">
+          <div style="flex:1">
+            <span>${item.nome}</span><br>
+            <strong>R$ ${parseFloat(item.preco).toFixed(2).replace('.', ',')}</strong>
+            <div style="margin-top:5px;">
+              Qtd: <span class="quantidade">${item.quantidade}</span>
+              <button class="remover">🗑️</button>
+            </div>
+          </div>
+        `;
+        itemHTML.querySelector('.remover').addEventListener('click', () => {
+          removerDoCarrinho(item.nome);
+        });
+        carrinhoItens.appendChild(itemHTML);
+      });
+      atualizarTotal();
+    }
+    function removerDoCarrinho(nome) {
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      carrinho = carrinho.filter(item => item.nome !== nome);
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      carregarCarrinhoDoLocalStorage();
+    }
+    function irAoPagamento() {
+      // Redireciona para a página de pagamento real
+      window.location.href = "checkout.html";
+    }
+    // Adiciona ao carrinho das promos (carrossel e grid)
+    document.querySelectorAll('.add-to-cart').forEach(botao => {
+      botao.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const card = botao.closest('.swiper-slide,.promo-card');
+        const nome = card.querySelector('h3').textContent;
+        // Preço: tenta pegar o valor da classe .preco-promo
+        let precoTexto = card.querySelector('.preco-promo').textContent.replace('R$', '').replace('.', '').replace(',', '.');
+        const preco = parseFloat(precoTexto);
+        const imgEl = card.querySelector('img') || card.querySelector('.promo-img');
+        const imagemURL = imgEl ? imgEl.src : '';
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        let existente = carrinho.find(i => i.nome === nome);
+        if (existente) {
+          existente.quantidade += 1;
+        } else {
+          carrinho.push({ nome, preco, quantidade: 1, imagem_url: imagemURL, tipo: "promo" });
+        }
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        carregarCarrinhoDoLocalStorage();
+        abrirCarrinho();
+        if (window.anime) anime({ targets: card, scale: [1, 1.07, 1], easing: 'easeInOutCubic', duration: 340 });
+      });
+    });
+    document.addEventListener('DOMContentLoaded', carregarCarrinhoDoLocalStorage);
+  </script>
+</body>
+</html>

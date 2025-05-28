@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meu Perfil - GamerZone</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="login-check.js"></script>
+  <style>
+    .perfil-container {
+      max-width: 410px;
+      margin: 3rem auto 0 auto;
+      background: #23243a;
+      border-radius: 18px;
+      box-shadow: 0 2px 24px #38b6ff22, 0 2px 12px #000a;
+      padding: 2rem 2rem 1.7rem 2rem;
+      color: #fff;
+      text-align: center;
+    }
+    .perfil-container h1 { color: #38b6ff; margin-bottom: 1.5rem;}
+    .perfil-info { text-align: left; margin-bottom: 2rem;}
+    .perfil-info p { margin: .4em 0; }
+    .compras-list { text-align: left; margin-top: 1em;}
+    .compras-list h3 { color: #38b6ff;}
+    .compra-item {
+      background: #181a2e;
+      border-radius: 10px;
+      padding: .7em .9em;
+      margin-bottom: .8em;
+      box-shadow: 0 2px 8px #38b6ff22;
+      display: flex; align-items: center; gap: 1em;
+    }
+    .compra-item img { width: 48px; height: 48px; border-radius: 7px;}
+    .compra-item-info { flex: 1;}
+    .logout-btn {
+      background: #ff5d5d;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: .8rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #0004;
+      transition: background .2s;
+      margin-top: 1.2em;
+    }
+    .logout-btn:hover { background: #e33;}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">🎮 GamerZone</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li class="dropdown">
+          <a href="#">Produtos</a>
+          <ul class="dropdown-menu">
+            <li><a href="montagen.html">Montagem de PC</a></li>
+            <li><a href="jogos.html">Jogos</a></li>
+            <li><a href="perifericos.html">Periféricos</a></li>
+          </ul>
+        </li>
+        <li><a href="promoçoes.html">Ofertas</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        <li>
+          <button id="profile-btn" title="Minha Conta" class="profile-btn">
+            <svg id="profile-icon" width="32" height="32" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22" stroke="#ff5050" stroke-width="4" fill="#e5e5e5"/>
+              <ellipse cx="24" cy="21" rx="8" ry="8" fill="#bbb"/>
+              <ellipse cx="24" cy="35" rx="13" ry="7" fill="#bbb"/>
+            </svg>
+          </button>
+        </li>
+        <li><a href="#" onclick="abrirCarrinho()">🛒 Carrinho</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="perfil-container" id="perfil-container">
+    <h1>Meu Perfil</h1>
+    <div class="perfil-info" id="perfil-info"></div>
+    <div class="compras-list" id="compras-list"></div>
+    <button class="logout-btn" onclick="logoutUser()">Sair da conta</button>
+  </div>
+  <script>
+    // Protege a página
+    checarSessao(function(logged) {
+      if(!logged) window.location.href = "login.html?redirect=perfil.html";
+    });
+
+    // Preenche perfil
+    fetch('/api/perfil', { credentials: 'include' })
+      .then(r => {
+        if (r.status === 401) window.location.href = "login.html?redirect=perfil.html";
+        return r.json();
+      })
+      .then(user => {
+        document.getElementById('perfil-info').innerHTML = `
+          <p><b>Nome:</b> ${user.nome}</p>
+          <p><b>Email:</b> ${user.email}</p>
+          <p><b>Data de nascimento:</b> ${user.data_nascimento ? new Date(user.data_nascimento).toLocaleDateString('pt-BR') : '-'}</p>
+          <p><b>ID:</b> ${user.id}</p>
+        `;
+        // Compras
+        let comprasHTML = "<h3>Últimas Compras</h3>";
+        if (user.compras && user.compras.length > 0) {
+          user.compras.forEach(c => {
+            comprasHTML += `
+              <div class="compra-item">
+                <img src="${c.imagem_url}" alt="${c.produto_nome}">
+                <div class="compra-item-info">
+                  <b>${c.produto_nome}</b><br>
+                  Qtd: ${c.quantidade} <br>
+                  <span>R$ ${Number(c.preco).toFixed(2).replace('.', ',')}</span>
+                </div>
+              </div>
+            `;
+          });
+        } else {
+          comprasHTML += "<p>Você ainda não possui compras registradas.</p>";
+        }
+        document.getElementById('compras-list').innerHTML = comprasHTML;
+      });
+
+    function logoutUser() {
+      fetch('/api/logout', { method: 'POST', credentials: 'include' })
+      .then(() => window.location.href = "index.html");
+    }
+  </script>
+</body>
+</html>

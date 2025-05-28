@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>GamerZone - Montagem de PC 2D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="m.css">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body> <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🎮 GamerZone</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li class="dropdown">
+          <a href="#">Produtos</a>
+          <ul class="dropdown-menu">
+            <li><a href="montagen.html">Montagem de PC</a></li>
+            <li><a href="jogos.html">Jogos</a></li>
+            <li><a href="perifericos.html">Periféricos</a></li>
+          </ul>
+        </li>
+        <li><a href="promoçoes.html">Ofertas</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        <li id="login-link"><a href="login.html">Login</a></li>
+        <li><a href="#" onclick="window.location.href='index.html#carrinho-lateral'">🛒 Carrinho</a></li>
+        <li>
+          <!-- Formulário de pesquisa na navbar -->
+          <form id="form-pesquisa" class="form-pesquisa" onsubmit="return false;">
+            <input type="text" id="input-pesquisa" placeholder="Pesquisar produtos..." aria-label="Pesquisar produtos" autocomplete="off">
+            <button type="submit">🔍</button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="montagem" class="montagem-section">
+      <h1>Monte Seu PC Gamer</h1>
+      <div class="montagem-container">
+        <div class="componentes-separados">
+          <div class="componente-visu" id="visu-gabinete">
+            <img id="gabinete-img" src="img/gabinete-gamer.png" alt="Gabinete Selecionado">
+            <span>Gabinete</span>
+          </div>
+          <div class="componente-visu" id="visu-placamae">
+            <img id="placa-mae-img" src="img/placamae1.png" alt="Placa-mãe">
+            <span>Placa-mãe</span>
+          </div>
+          <div class="componente-visu" id="visu-cpu">
+            <img id="cpu-img" src="img/cpu1.png" alt="CPU">
+            <span>Processador</span>
+          </div>
+          <div class="componente-visu" id="visu-cooler">
+            <img id="cooler-img" src="img/cooler1.png" alt="Cooler">
+            <span>Cooler</span>
+          </div>
+          <div class="componente-visu" id="visu-gpu">
+            <img id="gpu-img" src="img/gpu1.png" alt="GPU">
+            <span>Placa de Vídeo</span>
+          </div>
+          <div class="componente-visu" id="visu-ram">
+            <img id="ram-img" src="img/ram1.png" alt="RAM">
+            <span>RAM</span>
+          </div>
+          <div class="componente-visu" id="visu-ssd">
+            <img id="ssd-img" src="img/ssd1.png" alt="SSD">
+            <span>SSD</span>
+          </div>
+          <div class="componente-visu" id="visu-psu">
+            <img id="psu-img" src="img/psu1.png" alt="Fonte">
+            <span>Fonte</span>
+          </div>
+        </div>
+        <div class="component-panel">
+          <h2>Escolha os Componentes</h2>
+          <form id="componentes-form">
+            <div class="comp-select">
+              <label>Gabinete</label>
+              <select id="gabinete-sel">
+                <option value="gamer" data-img="img/gabinete-gamer.png">Gamer</option>
+                <option value="compacto" data-img="img/gabinete-compacto.png">Compacto</option>
+                <option value="mid" data-img="img/gabinete-mid.png">Mid Tower</option>
+              </select>
+            </div>
+            <div class="comp-select">
+              <label>Placa-mãe</label>
+              <select name="placa-mae" id="placa-mae-sel"></select>
+            </div>
+            <div class="comp-select">
+              <label>Processador (CPU)</label>
+              <select name="cpu" id="cpu-sel"></select>
+            </div>
+            <div class="comp-select">
+              <label>Cooler</label>
+              <select name="cooler" id="cooler-sel"></select>
+            </div>
+            <div class="comp-select">
+              <label>Placa de vídeo (GPU)</label>
+              <select name="gpu" id="gpu-sel"></select>
+            </div>
+            <div class="comp-select">
+              <label>Memória RAM</label>
+              <select name="ram" id="ram-sel"></select>
+            </div>
+            <div class="comp-select">
+              <label>Armazenamento (SSD)</label>
+              <select name="ssd" id="ssd-sel"></select>
+            </div>
+            <div class="comp-select">
+              <label>Fonte (PSU)</label>
+              <select name="psu" id="psu-sel"></select>
+            </div>
+          </form>
+          <div class="medidores">
+            <div class="medidor-fps">
+              <span>Estimativa de FPS Médio (Jogos Atuais):</span>
+              <span id="fps-value">---</span>
+            </div>
+            <div class="custo-total">
+              <span>Custo Total:</span>
+              <span id="custo-total">R$ 0,00</span>
+            </div>
+            <button id="adicionar-montagem-carrinho" class="btn-adicionar-carrinho">
+              Adicionar Montagem ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="legenda">
+        <h3>Legenda dos Tipos de Peça:</h3>
+        <span class="badge badge-custo">Custo-Benefício</span>
+        <span class="badge badge-desempenho">Desempenho</span>
+        <span class="badge badge-economia">Economia</span>
+      </div>
+    </section>
+    <section id="sobre" class="sobre-section">
+      <h2>Sobre a GamerZone</h2>
+      <p>
+        Monte seu PC Gamer de forma fácil, visualizando cada componente separadamente e em destaque. Compare peças por custo-benefício, desempenho ou economia, e veja a estimativa de FPS nos jogos mais atuais de acordo com sua montagem!
+      </p>
+    </section>
+  </main>
+
+  <!-- Resultados da pesquisa -->
+  <div id="resultados-pesquisa" class="resultados-pesquisa"></div>
+
+  <footer>
+    <span>GamerZone &copy; 2025</span>
+  </footer>
+ 
+    <script src="main-carrinho.js"></script>
+  <script src="montador3d.js"></script>
+
+  </body>
+  

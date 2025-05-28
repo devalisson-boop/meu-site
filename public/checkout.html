@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finalizar Compra</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="login-check.js"></script>
+  <style>
+    .checkout-container {
+      max-width: 430px;
+      margin: 3rem auto;
+      background: #23243a;
+      border-radius: 18px;
+      box-shadow: 0 2px 24px #38b6ff22, 0 2px 12px #000a;
+      padding: 2rem 2rem 1.7rem 2rem;
+      color: #fff;
+      text-align: center;
+    }
+    .checkout-container h1 { color: #38b6ff; margin-bottom: 1.5rem;}
+    .checkout-list { margin-bottom: 2em;}
+    .checkout-item {
+      display: flex; align-items: center; gap: 1em;
+      background: #181a2e;
+      border-radius: 10px;
+      padding: .7em .9em;
+      margin-bottom: .8em;
+      box-shadow: 0 2px 8px #38b6ff22;
+    }
+    .checkout-item img { width: 48px; height: 48px; border-radius: 7px;}
+    .checkout-item-info { flex: 1;}
+    .total-final { font-size: 1.2em; font-weight: 500; color: #2ecc40; margin-bottom: 1.5em;}
+    .form-group { margin-bottom: 1em; text-align:left;}
+    .form-group label { display:block; margin-bottom:.4em;}
+    .form-group input, .form-group select { width:100%; padding: .5em; border-radius:6px; border:none;}
+    .btn-pagar {
+      background: #38b6ff; color:#fff;
+      border: none; border-radius: 8px; padding:.8em 2em;
+      font-size:1.1em; font-weight:bold; cursor:pointer;
+      margin-top:.8em; transition:background .2s;
+    }
+    .btn-pagar:hover { background: #2192c7; }
+    .success-msg { color:#2ecc40; font-size:1.1em; margin-top:1em;}
+    .error-msg { color:#ff5050; font-size:1.1em; margin-top:1em;}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">🎮 GamerZone</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li class="dropdown">
+          <a href="#">Produtos</a>
+          <ul class="dropdown-menu">
+            <li><a href="montagen.html">Montagem de PC</a></li>
+            <li><a href="jogos.html">Jogos</a></li>
+            <li><a href="perifericos.html">Periféricos</a></li>
+          </ul>
+        </li>
+        <li><a href="promoçoes.html">Ofertas</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        <li>
+          <button id="profile-btn" title="Minha Conta" class="profile-btn">
+            <svg id="profile-icon" width="32" height="32" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22" stroke="#ff5050" stroke-width="4" fill="#e5e5e5"/>
+              <ellipse cx="24" cy="21" rx="8" ry="8" fill="#bbb"/>
+              <ellipse cx="24" cy="35" rx="13" ry="7" fill="#bbb"/>
+            </svg>
+          </button>
+        </li>
+        <li><a href="#" onclick="abrirCarrinho()">🛒 Carrinho</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="checkout-container">
+    <h1>Finalizar Compra</h1>
+    <div class="checkout-list" id="checkout-list"></div>
+    <div class="total-final" id="total-final"></div>
+    <form id="pagamentoForm">
+      <div class="form-group">
+        <label for="pagamento">Método de Pagamento</label>
+        <select id="pagamento" name="pagamento" required>
+          <option value="">Selecione</option>
+          <option value="pix">PIX</option>
+          <option value="cartao">Cartão de Crédito</option>
+          <option value="boleto">Boleto Bancário</option>
+        </select>
+      </div>
+      <div class="form-group" id="cartao-fields" style="display:none">
+        <label for="numCartao">Número do Cartão</label>
+        <input type="text" id="numCartao" name="numCartao" maxlength="19" autocomplete="cc-number"/>
+        <label for="nomeTitular">Nome do Titular</label>
+        <input type="text" id="nomeTitular" name="nomeTitular" autocomplete="cc-name"/>
+        <label for="validade">Validade</label>
+        <input type="text" id="validade" name="validade" maxlength="7" placeholder="MM/AAAA" autocomplete="cc-exp"/>
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" name="cvv" maxlength="4" autocomplete="cc-csc"/>
+      </div>
+      <button class="btn-pagar" type="submit">Pagar Agora</button>
+      <div class="success-msg" style="display:none" id="success-msg"></div>
+      <div class="error-msg" style="display:none" id="error-msg"></div>
+    </form>
+  </div>
+  <script>
+    // Protege rota
+    checarSessao(function(logged, usuario){
+      if(!logged) window.location.href="login.html?redirect=checkout.html";
+      window.usuarioAtual = usuario;
+    });
+
+    // Exibe carrinho
+    function mostrarCarrinhoCheckout() {
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      let html = '';
+      let total = 0;
+      carrinho.forEach(item => {
+        html += `
+          <div class="checkout-item">
+            <img src="${item.imagem_url}" alt="${item.nome}">
+            <div class="checkout-item-info">
+              <b>${item.nome}</b><br>
+              Qtd: ${item.quantidade} <br>
+              <span>R$ ${Number(item.preco).toFixed(2).replace('.', ',')}</span>
+            </div>
+          </div>
+        `;
+        total += item.preco * item.quantidade;
+      });
+      document.getElementById('checkout-list').innerHTML = html;
+      document.getElementById('total-final').textContent = 
+        'Total: R$ ' + total.toFixed(2).replace('.', ',');
+      window.carrinhoTotal = total;
+    }
+    mostrarCarrinhoCheckout();
+
+    // Campos cartão
+    document.getElementById('pagamento').addEventListener('change', function(){
+      document.getElementById('cartao-fields').style.display = 
+        this.value === "cartao" ? 'block' : 'none';
+    });
+
+    // Submete pagamento
+    document.getElementById('pagamentoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      if(carrinho.length === 0) {
+        mostrarErro("Carrinho vazio.");
+        return;
+      }
+      // Simula pagamento e envia pedido para backend
+      let metodo = document.getElementById('pagamento').value;
+      if(!metodo) { mostrarErro("Escolha o método de pagamento."); return; }
+      if(metodo === "cartao") {
+        let num = document.getElementById('numCartao').value.trim();
+        let nome = document.getElementById('nomeTitular').value.trim();
+        let validade = document.getElementById('validade').value.trim();
+        let cvv = document.getElementById('cvv').value.trim();
+        if(!num || !nome || !validade || !cvv) { mostrarErro("Preencha todos os dados do cartão."); return; }
+      }
+      // Envia pedido ao backend
+      fetch('/api/pedido', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          usuario_id: window.usuarioAtual.id,
+          itens: carrinho,
+          total: window.carrinhoTotal,
+          pagamento: metodo
+        })
+      })
+      .then(r=>r.json())
+      .then(resp=>{
+        if(resp.success){
+          mostrarSucesso("Pedido realizado! Em breve você receberá um email com os detalhes.");
+          localStorage.removeItem('carrinho');
+          setTimeout(()=>window.location.href="perfil.html", 2000);
+        } else {
+          mostrarErro(resp.error || "Erro ao criar pedido.");
+        }
+      })
+      .catch(()=>mostrarErro("Erro de conexão."));
+    });
+
+    function mostrarSucesso(msg){
+      document.getElementById('success-msg').textContent = msg;
+      document.getElementById('success-msg').style.display = "block";
+      document.getElementById('error-msg').style.display = "none";
+    }
+    function mostrarErro(msg){
+      document.getElementById('error-msg').textContent = msg;
+      document.getElementById('error-msg').style.display = "block";
+      document.getElementById('success-msg').style.display = "none";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>GamerZone - Periféricos Premium</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts para visual moderno -->
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:700|Roboto:400,700&display=swap" rel="stylesheet">
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Swiper.js para carrossel -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <!-- ScrollReveal para animações -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <style>
+.form-pesquisa {
+      display: flex; align-items: center; gap: 4px;
+      background: #23243a;
+      border-radius: 6px;
+      padding: 2px 8px;
+    }
+    .form-pesquisa input[type="text"] {
+      border: none;
+      background: transparent;
+      color: #fff;
+      padding: 5px;
+      outline: none;
+      width: 120px;
+    }
+    .form-pesquisa button {
+      background: none; border: none; color: #38b6ff; font-size: 1.2em; cursor:pointer;
+    }
+    .resultados-pesquisa {
+      background: #23243a;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px #38b6ff22;
+      color: #fff;
+      padding: 1.3em 1.4em;
+      min-height: 70px;
+      font-size: 1.08em;
+      margin:30px auto;
+      max-width:600px;
+      display:none;
+    }
+    .resultado-produto {
+      display: flex; align-items: center; gap: 17px;
+      margin-bottom: 13px;
+      border-bottom: 1px solid #454661;
+      padding-bottom: 9px;
+    }
+    .resultado-produto:last-child { border:0; margin-bottom:0;}
+    .resultado-produto img {
+      width: 70px; height: 70px; object-fit:cover; border-radius:8px; background:#111;
+    }
+
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #1a1d25 60%, #3c2258 100%);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      background: #21223b;
+      box-shadow: 0 2px 8px #0004;
+      padding: 1rem 0;
+    }
+    .navbar .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #38b6ff;
+      font-weight: bold;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links li a:hover {
+      color: #38b6ff;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: #22244b;
+      box-shadow: 0 2px 8px #0008;
+      border-radius: 8px;
+      padding: .5rem 0;
+      min-width: 180px;
+      z-index: 99;
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-menu li {
+      padding: .5rem 1.2rem;
+    }
+    .dropdown-menu li a {
+      color: #fff;
+      display: block;
+    }
+    .dropdown-menu li a:hover {
+      color: #38b6ff;
+      background: #292b4d;
+    }
+    .perifericos-hero {
+      background: linear-gradient(120deg, #3c2258 60%, #38b6ff 100%);
+      padding: 2rem 0 1.5rem 0;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 2px 16px #0002;
+    }
+    .perifericos-hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin-bottom: .5rem;
+    }
+    .perifericos-hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      color: #daeeff;
+    }
+
+    /* Carrossel Swiper */
+    .swiper {
+      width: 100%;
+      max-width: 1100px;
+      margin: 2rem auto 1.5rem auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 22px #38b6ff22, 0 2px 12px #000a;
+    }
+    .swiper-slide {
+      position: relative;
+      background: #181a2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.6rem 1.2rem 1.6rem;
+      min-height: 350px;
+    }
+    .swiper-slide img {
+      max-width: 270px;
+      width: 90vw;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 1.1rem;
+      filter: drop-shadow(0 4px 8px #38b6ff44);
+      background: #23243a;
+      border-radius: 12px;
+      padding: .6rem;
+    }
+    .swiper-slide h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.25rem;
+      color: #38b6ff;
+      margin-bottom: .28rem;
+    }
+    .swiper-slide .star {
+      color: #ffc107;
+      margin: 0 .06rem;
+    }
+    .swiper-slide .preco {
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+    .swiper-slide .desc {
+      font-size: .98rem;
+      color: #cce6ff;
+      margin-bottom: .6rem;
+      text-align: center;
+      min-height: 57px;
+    }
+    .swiper-slide .add-to-cart {
+      background: linear-gradient(90deg, #38b6ff, #26d0ce);
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      padding: .55rem 1.1rem;
+      border-radius: 7px;
+      font-size: 1.04rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #38b6ff44;
+      transition: background .2s, transform .1s;
+      letter-spacing: 1px;
+    }
+    .swiper-slide .add-to-cart:hover {
+      background: linear-gradient(90deg, #26d0ce, #38b6ff);
+      transform: scale(1.04);
+    }
+
+    /* Grid de posts de periféricos */
+    .perifericos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+      padding: 2.5rem 4vw 1rem 4vw;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .periferico-card {
+      background: #23243a;
+      border-radius: 16px;
+      box-shadow: 0 2px 20px #0007;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+      min-height: 420px;
+      position: relative;
+    }
+    .periferico-card.premium::before {
+      content: "PREMIUM";
+      color: #fff;
+      background: linear-gradient(90deg, #ffb347, #ffcc33, #ffe066);
+      padding: .15rem .7rem;
+      border-radius: 0 0 12px 0;
+      font-size: .93rem;
+      font-family: 'Orbitron', sans-serif;
+      position: absolute;
+      left: 0; top: 0;
+      z-index: 2;
+      box-shadow: 0 2px 12px #fff4;
+      letter-spacing: 1px;
+    }
+    .periferico-img {
+      width: 100%;
+      height: 168px;
+      object-fit: contain;
+      background: #1a1d25;
+      border-radius: 16px 16px 0 0;
+      margin-bottom: .4rem;
+      margin-top: .15rem;
+    }
+    .periferico-info {
+      flex: 1;
+      padding: 1.2rem 1.1rem .7rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+    .periferico-info h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      font-family: 'Orbitron', sans-serif;
+      color: #38b6ff;
+    }
+    .periferico-info .preco {
+      font-size: 1.07rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: .18rem;
+    }
+    .periferico-info .desc {
+      font-size: .96rem;
+      color: #dbe6ff;
+      margin: .2rem 0 .5rem 0;
+      flex: 1;
+    }
+    .periferico-info .add-to-cart {
+      background: linear-gradient(90deg, #38b6ff, #26d0ce);
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      padding: .43rem 0;
+      border-radius: 6px;
+      margin-top: .35rem;
+      font-size: .99rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #38b6ff44;
+      transition: background .2s, transform .1s;
+    }
+    .periferico-info .add-to-cart:hover {
+      background: linear-gradient(90deg, #26d0ce, #38b6ff);
+      transform: scale(1.04);
+    }
+
+    /* Responsividade */
+    @media (max-width: 900px) {
+      .perifericos-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem;}
+      .carrinho { width: 99vw; max-width: 410px; right: -110vw; }
+      .carrinho.ativo { right: 0; }
+      .swiper { max-width: 99vw;}
+    }
+    @media (max-width: 600px) {
+      .perifericos-hero h1 { font-size: 1.3rem;}
+      .perifericos-hero p { font-size: .96rem;}
+      .carrinho { padding: 1rem 3vw;}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🎮 GamerZone</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li class="dropdown">
+          <a href="#">Produtos</a>
+          <ul class="dropdown-menu">
+            <li><a href="montagen.html">Montagem de PC</a></li>
+            <li><a href="jogos.html">Jogos</a></li>
+            <li><a href="perifericos.html">Periféricos</a></li>
+          </ul>
+        </li>
+        <li><a href="promoçoes.html">Ofertas</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        <li id="login-link"><a href="login.html">Login</a></li>
+        <li><a href="#" onclick="abrirCarrinho()">🛒 Carrinho</a></li>
+        <li>
+  <form id="form-pesquisa" class="form-pesquisa" onsubmit="return false;">
+    <input type="text" id="input-pesquisa" placeholder="Pesquisar produtos..." aria-label="Pesquisar produtos" autocomplete="off">
+    <button type="submit">🔍</button>
+  </form>
+</li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <section class="perifericos-hero">
+    <h1><i class="fas fa-keyboard"></i> Periféricos Premium para Gamers</h1>
+    <p>Explore os melhores teclados, mouses, headsets, cadeiras e acessórios gamer do mercado. Garanta desempenho máximo e estilo para sua setup!</p>
+  </section>
+
+
+<div class="swiper">
+    <div class="swiper-wrapper">
+
+
+
+  <!-- Carrossel de periféricos premium -->
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <!-- Slide 1 -->
+      <div class="swiper-slide">
+        <img src="imgperifericos.png/teclado_gaming_razer_huntsman_elite_rgb_optomecanico_003_ad_l-removebg-preview.png" alt="Teclado Mecânico Razer Huntsman Elite">
+        <h3>Razer Huntsman Elite</h3>
+        <div>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star-half-alt"></i></span>
+        </div>
+        <div class="preco">R$ 1.599,90</div>
+        <div class="desc">
+          Switches ópticos, iluminação Razer Chroma RGB, apoio de pulso magnético almofadado e controles multimídia dedicados.
+        </div>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+      </div>
+      <!-- Slide 2 -->
+      <div class="swiper-slide">
+        <img src="imgperifericos.png/gprox2glogitech3.png" alt="Logitech G Pro X Superlight">
+        <h3>Logitech G Pro X Superlight</h3>
+        <div>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+        </div>
+        <div class="preco">R$ 999,00</div>
+        <div class="desc">
+          Mouse ultraleve, sensor HERO 25K, tecnologia LIGHTSPEED, autonomia de até 70h e deslizamento suave.
+        </div>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+      </div>
+      <!-- Slide 3 -->
+      <div class="swiper-slide">
+        <img src="imgperifericos.png/71PYgC+oolL-removebg-preview.png" alt="Headset SteelSeries Arctis Nova Pro">
+        <h3>SteelSeries Arctis Nova Pro</h3>
+        <div>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+        </div>
+        <div class="preco">R$ 2.399,00</div>
+        <div class="desc">
+          Noise cancelling ativo, áudio 360°, DAC dedicado, drivers premium e conforto extremo para longas sessões.
+        </div>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+      </div>
+      <!-- Slide 4 -->
+      <div class="swiper-slide">
+        <img src="imgperifericos.png/51eRFQXDNRL-removebg-preview (1).png" alt="Cadeira Gamer Secretlab Titan Evo 2022">
+        <h3>Secretlab Titan Evo 2022</h3>
+        <div>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+        </div>
+        <div class="preco">R$ 4.799,90</div>
+        <div class="desc">
+          Ergonomia profissional, revestimento premium, apoio para lombar ajustável, inclinação multi-lock e design exclusivo.
+        </div>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+      </div>
+      <!-- Slide 5 -->
+      <div class="swiper-slide">
+        <img src="imgperifericos.png/download-removebg-preview.png" alt="Monitor Alienware AW3423DW QD-OLED">
+        <h3>Alienware AW3423DW QD-OLED (34")</h3>
+        <div>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+          <span class="star"><i class="fas fa-star"></i></span>
+        </div>
+        <div class="preco">R$ 9.999,00</div>
+        <div class="desc">
+          QD-OLED, 175Hz, 0.1ms, G-Sync Ultimate, curvatura imersiva e HDR de última geração para visuais surreais.
+        </div>
+        <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+      </div>
+    </div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <!-- Add Navigation -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+  <main>
+   
+<div id="resultados-pesquisa" class="resultados-pesquisa"></div>
+
+
+    <section class="perifericos-grid">
+      <!-- Mouse RGB -->
+      <div class="periferico-card premium">
+        <img class="periferico-img" src="imgperifericos.png/gabarito_logitech.png" alt="Logitech G Pro Wireless">
+        <div class="periferico-info">
+          <h3>Logitech G Pro Wireless</h3>
+          <div class="preco">R$ 799,00</div>
+          <div class="desc">Mouse sem fio ultraleve, sensor HERO 16K, 80g, RGB Lightsync, 1ms de resposta. O favorito dos pro players.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Teclado Mecânico HyperX -->
+      <div class="periferico-card premium">
+        <img class="periferico-img" src="imgperifericos.png/51FqRbqp7LL._AC_UF894_1000_QL80_-removebg-preview.png" alt="HyperX Alloy Origins">
+        <div class="periferico-info">
+          <h3>HyperX Alloy Origins</h3>
+          <div class="preco">R$ 999,00</div>
+          <div class="desc">Switches mecânicos HyperX, RGB personalizável, estrutura em alumínio aeronáutico, cabo USB-C destacável.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Headset Corsair Virtuoso RGB -->
+      <div class="periferico-card">
+        <img class="periferico-img" src="imgperifericos.png/71xK0oPvBLL._AC_SY200_QL15_-removebg-preview.png" alt="Corsair Virtuoso RGB Wireless XT">
+        <div class="periferico-info">
+          <h3>Corsair Virtuoso RGB XT</h3>
+          <div class="preco">R$ 1.499,00</div>
+          <div class="desc">Áudio Hi-Res, conexão wireless e Bluetooth, microfone destacável e conforto premium para maratonas gamer.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Mousepad XL RGB -->
+      <div class="periferico-card">
+        <img class="periferico-img" src="imgperifericos.png/51Jlb+7-laL.jpg" alt="Mousepad Steelseries QcK Prism XL">
+        <div class="periferico-info">
+          <h3>Steelseries QcK Prism XL</h3>
+          <div class="preco">R$ 499,00</div>
+          <div class="desc">Superfície microtexturizada, base antiderrapante, iluminação RGB 2 zonas, 900x300mm para setups gigantes.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Webcam Logitech Brio 4K -->
+      <div class="periferico-card premium">
+        <img class="periferico-img" src="imgperifericos.png/71SAamTGWQL._AC_UF894_1000_QL80_-removebg-preview.png" alt="Webcam Logitech Brio 4K">
+        <div class="periferico-info">
+          <h3>Logitech Brio 4K</h3>
+          <div class="preco">R$ 1.199,00</div>
+          <div class="desc">Streaming em 4K Ultra HD, HDR, foco automático, microfones estéreo e compatível com Windows Hello.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Cadeira TGT Omega -->
+      <div class="periferico-card">
+        <img class="periferico-img" src="imgperifericos.png/47186-removebg-preview.png" alt="TGT Omega Black">
+        <div class="periferico-info">
+          <h3>TGT Omega Black</h3>
+          <div class="preco">R$ 1.799,00</div>
+          <div class="desc">Revestimento em PU premium, apoio lombar, inclinação 180°, design esportivo e alta durabilidade.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Microfone Blue Yeti X -->
+      <div class="periferico-card">
+        <img class="periferico-img" src="imgperifericos.png/a_278103_alta_6-removebg-preview.png" alt="Blue Yeti X">
+        <div class="periferico-info">
+          <h3>Blue Yeti X</h3>
+          <div class="preco">R$ 899,00</div>
+          <div class="desc">Microfone condensador USB, 4 padrões polares, iluminação LED e qualidade de estúdio para streaming e podcasts.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Controle Elite Xbox -->
+      <div class="periferico-card premium">
+        <img class="periferico-img" src="imgperifericos.png/717XTm0moDL-removebg-preview.png" alt="Xbox Elite Wireless Controller Series 2">
+        <div class="periferico-info">
+          <h3>Xbox Elite Controller Series 2</h3>
+          <div class="preco">R$ 1.499,00</div>
+          <div class="desc">Gatilhos ajustáveis, paddles traseiros, perfis customizáveis e bateria de até 40h. O controle dos campeões.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Luz RGB Elgato Key Light Air -->
+      <div class="periferico-card">
+        <img class="periferico-img" src="imgperifericos.png/Slider_3.jpg" alt="Elgato Key Light Air">
+        <div class="periferico-info">
+          <h3>Elgato Key Light Air</h3>
+          <div class="preco">R$ 879,00</div>
+          <div class="desc">Iluminação profissional ajustável por app, 1400 lumens, LED RGB, para streaming ou setup de gravação.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Hub USB RGB Ugreen -->
+      <div class="periferico-card">
+        <img class="periferico-img" src="imgperifericos.png/images.jpg" alt="Ugreen 7 Portas RGB">
+        <div class="periferico-info">
+          <h3>Ugreen Hub 7 Portas RGB</h3>
+          <div class="preco">R$ 219,00</div>
+          <div class="desc">7 portas USB 3.0, iluminação RGB, carregamento rápido, design gamer compacto e robusto.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Suporte para Headset RGB -->
+      <div class="periferico-card">
+        <img class="periferico-img" src="imgperifericos.png/EROS_M3_ELITE_NEWS2.jpg" alt="Suporte Headset RGB Gamdias">
+        <div class="periferico-info">
+          <h3>Gamdias Eros RGB Stand</h3>
+          <div class="preco">R$ 149,00</div>
+          <div class="desc">Suporte para headset com iluminação RGB dinâmica, base antiderrapante e hubs USB integrados.</div>
+          <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Adicionar ao carrinho</button>
+        </div>
+      </div>
+      <!-- Adicione mais periféricos facilmente! -->
+    </section>
+  </main>
+
+  <!-- Carrinho lateral -->
+<div id="carrinho-lateral" class="carrinho">
+  <h2>🛒 Carrinho</h2>
+  <div id="itens-carrinho" style="max-height: 53vh; overflow-y: auto; margin-bottom:1rem;"></div>
+  <p>Total: <span id="total">R$ 0,00</span></p>
+  <button onclick="fecharCarrinho()">Fechar</button>
+  <button id="btn-pagamento" class="btn-pagamento" onclick="irAoPagamento()">Ir ao Pagamento <i class="fas fa-arrow-right"></i></button>
+</div>
+
+  <!-- Swiper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Carrossel Swiper
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      grabCursor: true,
+      slidesPerView: 1,
+      spaceBetween: 4,
+      effect: "coverflow",
+      coverflowEffect: { rotate: 8, stretch: 0, depth: 120, modifier: 1, slideShadows: false },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      pagination: { el: ".swiper-pagination", clickable: true },
+      breakpoints: {
+        700: { slidesPerView: 2, spaceBetween: 18 },
+        1000: { slidesPerView: 3, spaceBetween: 22 }
+      }
+    });
+  </script>
+  <script>
+    // Carrinho usando localStorage para compartilhar entre todas as páginas
+    let totalCarrinho = 0;
+    const carrinhoItens = document.getElementById('itens-carrinho');
+    function abrirCarrinho() {
+      document.getElementById('carrinho-lateral').classList.add('ativo');
+      carregarCarrinhoDoLocalStorage();
+    }
+    function fecharCarrinho() {
+      document.getElementById('carrinho-lateral').classList.remove('ativo');
+    }
+    function atualizarTotal() {
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      let novoTotal = 0;
+      carrinho.forEach(item => {
+        novoTotal += item.preco * item.quantidade;
+      });
+      totalCarrinho = novoTotal;
+      document.getElementById('total').textContent = 'R$ ' + totalCarrinho.toFixed(2).replace('.', ',');
+    }
+    function carregarCarrinhoDoLocalStorage() {
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      carrinhoItens.innerHTML = '';
+      carrinho.forEach(item => {
+        const itemHTML = document.createElement('div');
+        itemHTML.classList.add('item-carrinho');
+        itemHTML.dataset.preco = item.preco;
+        itemHTML.dataset.nome = item.nome;
+        itemHTML.innerHTML = `
+          <img src="${item.imagem_url}" alt="${item.nome}">
+          <div style="flex:1">
+            <span>${item.nome}</span><br>
+            <strong>R$ ${parseFloat(item.preco).toFixed(2).replace('.', ',')}</strong>
+            <div style="margin-top:5px;">
+              Qtd: <span class="quantidade">${item.quantidade}</span>
+              <button class="remover">🗑️</button>
+            </div>
+          </div>
+        `;
+        itemHTML.querySelector('.remover').addEventListener('click', () => {
+          removerDoCarrinho(item.nome);
+        });
+        carrinhoItens.appendChild(itemHTML);
+      });
+      atualizarTotal();
+    }
+    function removerDoCarrinho(nome) {
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      carrinho = carrinho.filter(item => item.nome !== nome);
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      carregarCarrinhoDoLocalStorage();
+    }
+    // Adiciona ao carrinho dos periféricos premium e grid
+    document.querySelectorAll('.add-to-cart').forEach(botao => {
+      botao.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const card = botao.closest('.swiper-slide,.periferico-card');
+        const nome = card.querySelector('h3').textContent;
+        const precoTexto = card.querySelector('.preco').textContent.replace('R$', '').replace('.', '').replace(',', '.');
+        const preco = parseFloat(precoTexto);
+        const imgEl = card.querySelector('img') || card.querySelector('.periferico-img');
+        const imagemURL = imgEl ? imgEl.src : '';
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        let existente = carrinho.find(i => i.nome === nome);
+        if (existente) {
+          existente.quantidade += 1;
+        } else {
+          carrinho.push({ nome, preco, quantidade: 1, imagem_url: imagemURL, tipo: "periferico" });
+        }
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        carregarCarrinhoDoLocalStorage();
+        abrirCarrinho();
+        if (window.anime) anime({ targets: card, scale: [1, 1.07, 1], easing: 'easeInOutCubic', duration: 340 });
+      });
+    });
+    // Carrinho inicial
+    document.addEventListener('DOMContentLoaded', carregarCarrinhoDoLocalStorage);
+    // ScrollReveal para animações dos cards e carrossel
+    ScrollReveal().reveal('.periferico-card', { interval: 80, distance: '36px', origin: 'bottom', duration: 900, opacity: 0.1 });
+    ScrollReveal().reveal('.swiper-slide', { interval: 80, distance: '60px', origin: 'top', duration: 900, opacity: 0.1 });
+
+
+
+
+
+
+
+
+async function coletarProdutosPaginaExpandido() {
+  let produtos = [];
+  // Produtos do carrossel (swiper-slide)
+  document.querySelectorAll('.swiper-slide').forEach(card => {
+    const nome = card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : '';
+    const precoElem = card.querySelector('.preco');
+    const preco = precoElem ? precoElem.textContent.replace('R$', '').replace('.', '').replace(',', '.').trim() : '';
+    const precoNum = Number(preco);
+    const imgElem = card.querySelector('img');
+    const imagem_url = imgElem ? imgElem.src : '';
+    if(nome) produtos.push({ nome, preco: precoNum, imagem_url, pagina: window.location.pathname.replace(/^\//,'') || "perifericos.html" });
+  });
+  // Produtos da grid (periferico-card)
+  document.querySelectorAll('.periferico-card').forEach(card => {
+    const nome = card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : '';
+    const precoElem = card.querySelector('.preco');
+    const preco = precoElem ? precoElem.textContent.replace('R$', '').replace('.', '').replace(',', '.').trim() : '';
+    const precoNum = Number(preco);
+    const imgElem = card.querySelector('img');
+    const imagem_url = imgElem ? imgElem.src : '';
+    if(nome) produtos.push({ nome, preco: precoNum, imagem_url, pagina: window.location.pathname.replace(/^\//,'') || "perifericos.html" });
+  });
+  // Busca produtos de outras páginas (ajuste URLs se necessário)
+  const paginasExtras = [
+    { url: 'index.html', seletor: '.product-card, .game-card, .immersive-card' },
+    { url: 'montagen.html', seletor: '.product-card, .game-card, .immersive-card' },
+    { url: 'jogos.html', seletor: '.product-card, .game-card, .immersive-card' }
+  ];
+  for (const pagina of paginasExtras) {
+    try {
+      if((window.location.pathname.indexOf(pagina.url)!==-1)) continue;
+      const resp = await fetch(pagina.url);
+      if (!resp.ok) continue;
+      const html = await resp.text();
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      temp.querySelectorAll(pagina.seletor).forEach(card => {
+        const nome = card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : '';
+        const precoElem = card.querySelector('.price') || card.querySelector('.game-price') || card.querySelector('.preco');
+        const preco = precoElem ? precoElem.textContent.replace('R$', '').replace('.', '').replace(',', '.').trim() : '';
+        const precoNum = Number(preco);
+        const imgElem = card.querySelector('img');
+        const imagem_url = imgElem ? imgElem.src : '';
+        if(nome) produtos.push({ nome, preco: precoNum, imagem_url, pagina: pagina.url });
+      });
+    } catch(e) {}
+  }
+  return produtos;
+}
+
+function destacarProdutoAoCarregar() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const produtoNome = urlParams.get('produto');
+  if(produtoNome) {
+    const cards = document.querySelectorAll('.swiper-slide, .periferico-card');
+    cards.forEach(card => {
+      const h3 = card.querySelector('h3');
+      if(h3 && h3.textContent.trim().toLowerCase() === decodeURIComponent(produtoNome).toLowerCase()) {
+        card.scrollIntoView({behavior: "smooth", block: "center"});
+        card.style.boxShadow = "0 0 0 5px #38b6ff";
+        setTimeout(()=>{card.style.boxShadow='';}, 3000);
+      }
+    });
+  }
+}
+document.addEventListener("DOMContentLoaded", destacarProdutoAoCarregar);
+
+document.getElementById('form-pesquisa').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const termo = document.getElementById('input-pesquisa').value;
+  const divResultados = document.getElementById('resultados-pesquisa');
+  if (termo.length < 2) {
+    divResultados.style.display = "none";
+    return;
+  }
+  divResultados.innerHTML = "Buscando...";
+  divResultados.style.display = "block";
+  const resultados = await coletarProdutosPaginaExpandido();
+  const encontrados = resultados.filter(prod => prod.nome && prod.nome.toLowerCase().includes(termo.toLowerCase()));
+  if(encontrados.length === 0){
+    divResultados.innerHTML = `<b>Produto não encontrado.</b>`;
+    return;
+  }
+  let html = `<b>Resultados encontrados:</b><br><br>`;
+  encontrados.forEach(prod => {
+    if((prod.pagina === window.location.pathname.replace(/^\//,'') || (prod.pagina==="perifericos.html" && window.location.pathname.endsWith('perifericos.html')))) {
+      html += `<div class="resultado-produto" style="cursor:pointer" onclick="rolarAteProduto('${encodeURIComponent(prod.nome)}')">
+        ${prod.imagem_url ? `<img src="${prod.imagem_url}" alt="${prod.nome}">` : ''}
+        <div>
+          <div style="font-weight:600;font-size:1.07em;">${prod.nome}</div>
+          ${prod.preco ? `<div style="color:#2ecc40;">R$ ${prod.preco.toFixed(2).replace('.', ',')}</div>` : ''}
+          <div style="font-size:0.92em;color:#aaa;">Página atual</div>
+        </div>
+      </div>`;
+    } else {
+      html += `<a href="${prod.pagina}?produto=${encodeURIComponent(prod.nome)}" style="text-decoration:none;color:unset;">
+        <div class="resultado-produto" style="cursor:pointer">
+          ${prod.imagem_url ? `<img src="${prod.imagem_url}" alt="${prod.nome}">` : ''}
+          <div>
+            <div style="font-weight:600;font-size:1.07em;">${prod.nome}</div>
+            ${prod.preco ? `<div style="color:#2ecc40;">R$ ${prod.preco.toFixed(2).replace('.', ',')}</div>` : ''}
+            <div style="font-size:0.92em;color:#aaa;">${prod.pagina.replace('.html','').replace('index','Início').replace('montagen','Montagem').replace('jogos','Jogos').replace('perifericos','Periféricos')}</div>
+          </div>
+        </div>
+      </a>`;
+    }
+  });
+  divResultados.innerHTML = html;
+});
+
+function rolarAteProduto(nome) {
+  const cards = document.querySelectorAll('.swiper-slide, .periferico-card');
+  cards.forEach(card => {
+    const h3 = card.querySelector('h3');
+    if(h3 && h3.textContent.trim().toLowerCase() === decodeURIComponent(nome).toLowerCase()) {
+      card.scrollIntoView({behavior: "smooth", block: "center"});
+      card.style.boxShadow = "0 0 0 5px #38b6ff";
+      setTimeout(()=>{card.style.boxShadow='';}, 3000);
+    }
+  });
+}
+document.addEventListener('click', function(e){
+  const resultados = document.getElementById('resultados-pesquisa');
+  const form = document.getElementById('form-pesquisa');
+  if(resultados && !form.contains(e.target) && !resultados.contains(e.target)){
+    resultados.style.display = "none";
+  }
+});
+
+  </script>
+</body>
+</html>

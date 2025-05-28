@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>GamerZone - Contato</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:700|Roboto:400,700&display=swap" rel="stylesheet">
+ 
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #1a1d25 60%, #38b6ff 100%);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .navbar {
+      background: #21223b;
+      box-shadow: 0 2px 8px #0004;
+      padding: 1rem 0;
+    }
+    .navbar .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #38b6ff;
+      font-weight: bold;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links li a:hover {
+      color: #38b6ff;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: #22244b;
+      box-shadow: 0 2px 8px #0008;
+      border-radius: 8px;
+      padding: .5rem 0;
+      min-width: 180px;
+      z-index: 99;
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-menu li {
+      padding: .5rem 1.2rem;
+    }
+    .dropdown-menu li a {
+      color: #fff;
+      display: block;
+    }
+    .dropdown-menu li a:hover {
+      color: #38b6ff;
+      background: #292b4d;
+    }
+    .contato-hero {
+      background: linear-gradient(120deg, #38b6ff 60%, #3c2258 100%);
+      padding: 2.2rem 0 1.3rem 0;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 2px 16px #0002;
+    }
+    .contato-hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.4rem;
+      letter-spacing: 2px;
+      margin-bottom: .5rem;
+    }
+    .contato-hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      color: #daeeff;
+    }
+    .contato-container {
+      max-width: 520px;
+      margin: 2.5rem auto 0 auto;
+      background: #23243a;
+      border-radius: 18px;
+      box-shadow: 0 2px 24px #38b6ff22, 0 2px 12px #000a;
+      padding: 2.2rem 2.2rem 1.3rem 2.2rem;
+    }
+    .contato-container h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #38b6ff;
+      font-size: 1.4rem;
+      margin-bottom: 1.15rem;
+      letter-spacing: 1px;
+    }
+    .contato-form label {
+      display: block;
+      margin-bottom: .2rem;
+      color: #cce6ff;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .contato-form input, .contato-form textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 1.1rem;
+      font-size: 1rem;
+      background: #181a2e;
+      color: #fff;
+      transition: box-shadow 0.2s;
+    }
+    .contato-form input:focus, .contato-form textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #38b6ff99;
+    }
+    .contato-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .contato-form button {
+      background: linear-gradient(90deg, #38b6ff, #26d0ce);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      padding: .82rem 0;
+      margin-top: .2rem;
+      margin-bottom: 0.8rem;
+      box-shadow: 0 2px 8px #38b6ff44;
+      cursor: pointer;
+      width: 100%;
+      letter-spacing: 1px;
+      transition: background .2s, transform .1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7em;
+    }
+    .contato-form button:hover {
+      background: linear-gradient(90deg, #26d0ce, #38b6ff);
+      transform: scale(1.03);
+    }
+    .contato-info-extra {
+      margin-top: 2rem;
+      text-align: center;
+      color: #cce6ff;
+      font-size: .98rem;
+      opacity: .88;
+    }
+    .contato-info-extra a {
+      color: #38b6ff;
+      text-decoration: underline;
+    }
+    .contato-info-extra i {
+      color: #26d0ce;
+      margin-right: 4px;
+      margin-left: 4px;
+    }
+    @media (max-width:600px) {
+      .contato-container { padding: 1.2rem 4vw 1.1rem 4vw; }
+      .contato-hero h1 { font-size:1.3rem;}
+    }
+  </style>
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🎮 GamerZone</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li class="dropdown">
+          <a href="#">Produtos</a>
+          <ul class="dropdown-menu">
+            <li><a href="montagen.html">Montagem de PC</a></li>
+            <li><a href="jogos.html">Jogos</a></li>
+            <li><a href="perifericos.html">Periféricos</a></li>
+          </ul>
+        </li>
+        <li><a href="promoçoes.html">Ofertas</a></li>
+        <li><a href="#">Contato</a></li>
+        <li id="login-link"><a href="login.html">Login</a></li>
+        <li><a href="#" onclick="abrirCarrinho()">🛒 Carrinho</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="contato-hero">
+    <h1><i class="fas fa-envelope"></i> Fale Conosco</h1>
+    <p>Entre em contato com a equipe GamerZone! Tire dúvidas, envie sugestões ou solicite suporte. Nosso time está pronto para ajudar você.</p>
+  </section>
+
+  <main>
+    <div class="contato-container">
+      <h2>Envie uma mensagem</h2>
+      <form class="contato-form" id="contatoForm" autocomplete="on">
+        <label for="nome">Seu nome</label>
+        <input type="text" id="nome" name="nome" required maxlength="50" placeholder="Ex: João da Silva">
+
+        <label for="email">Seu e-mail</label>
+        <input type="email" id="email" name="email" required maxlength="80" placeholder="voce@email.com">
+
+        <label for="assunto">Assunto</label>
+        <input type="text" id="assunto" name="assunto" required maxlength="70" placeholder="Ex: Dúvida sobre envio">
+
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" required maxlength="1000" placeholder="Como podemos ajudar você?"></textarea>
+
+        <button type="submit"><i class="fas fa-paper-plane"></i> Enviar mensagem</button>
+      </form>
+      <div class="contato-info-extra">
+        <p>
+          Ou utilize nossos canais oficiais:
+          <br>
+          <i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/5599999999999" target="_blank">(99) 99999-9999</a>
+          <br>
+          <i class="fas fa-envelope"></i> E-mail: <a href="mailto:contato@gamerzone.com">contato@gamerzone.com</a>
+          <br>
+          <i class="fab fa-instagram"></i> Instagram: <a href="https://instagram.com/gamerzone" target="_blank">@gamerzone</a>
+        </p>
+        <p style="margin-top:1.6rem; font-size:.92rem; color:#fff7;">
+          GamerZone Store Ltda<br>
+          CNPJ: 12.345.678/0001-99<br>
+          Endereço: Rua dos Games, 1234 - São Paulo/SP
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Carrinho lateral (opcional, se quiser deixar visível nesta página) -->
+  <div id="carrinho-lateral" class="carrinho" style="display:none;">
+    <h2>🛒 Carrinho</h2>
+    <div id="itens-carrinho"></div>
+    <p>Total: <span id="total">R$ 0,00</span></p>
+    <button onclick="fecharCarrinho()">Fechar</button>
+  </div>
+
+  <script>
+    // Exemplo de envio de contato (simulação/local)
+    document.getElementById('contatoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Mensagem enviada! Obrigado por entrar em contato, responderemos em breve.");
+      this.reset();
+    });
+
+    // (Opcional) Use sua lógica de carrinho aqui
+    function abrirCarrinho() {
+      document.getElementById('carrinho-lateral').style.display = 'block';
+      // ... carregar carrinho ...
+    }
+    function fecharCarrinho() {
+      document.getElementById('carrinho-lateral').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
